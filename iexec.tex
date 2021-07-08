@@ -24,8 +24,8 @@
 \usepackage[tt=false,type1=true]{libertine}
 \usepackage{multicol}
 \usepackage{ffcode}
-\usepackage{exec}
-\title{\ff{exec}: \LaTeX{} Package \\ for Shell Executions}
+\usepackage{iexec}
+\title{\ff{iexec}: \LaTeX{} Package \\ for Inputable Shell Executions}
 \author{Yegor Bugayenko}
 \date{0.0.0 00.00.0000}
 \begin{document}
@@ -45,7 +45,7 @@ document and then put their output to the document:
 \raggedcolumns
 \begin{verbatim}
 \documentclass{article}
-\usepackage{exec}
+\usepackage{iexec}
 \begin{document}
 Today is \iexec{date +\%e-\%b-\%Y}.
 \end{document}
@@ -64,6 +64,6 @@ The first one executes, while the second one also inputs the output
 of the execution.
 
 More details about this package you can find
-in the \ff{yegor256/exec} GitHub repository.
+in the \ff{yegor256/iexec} GitHub repository.
 
 \end{document}

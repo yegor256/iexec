@@ -24,38 +24,38 @@
 
 .ONESHELL:
 
-all: exec.pdf zip
+all: iexec.pdf zip
 
-exec.pdf: exec.tex exec.sty
+iexec.pdf: iexec.tex iexec.sty
 	latexmk -pdf $<
 	texsc $<
 	texqc --ignore 'You have requested document class' $<
 
-zip: exec.pdf exec.sty
+zip: iexec.pdf iexec.sty
 	rm -rf package
 	mkdir package
 	cd package
-	mkdir exec
-	cd exec
+	mkdir iexec
+	cd iexec
 	cp ../../README.md .
 	version=$$(cat ../../VERSION.txt)
 	echo "Version is: $${version}"
 	date=$$(date +%Y/%m/%d)
 	echo "Date is: $${date}"
-	cp ../../exec.sty .
-	gsed -i "s|0\.0\.0|$${version}|" exec.sty
-	gsed -i "s|00\.00\.0000|$${date}|" exec.sty
-	cp ../../exec.tex .
-	gsed -i "s|0\.0\.0|$${version}|" exec.tex
-	gsed -i "s|00\.00\.0000|$${date}|" exec.tex
+	cp ../../iexec.sty .
+	gsed -i "s|0\.0\.0|$${version}|" iexec.sty
+	gsed -i "s|00\.00\.0000|$${date}|" iexec.sty
+	cp ../../iexec.tex .
+	gsed -i "s|0\.0\.0|$${version}|" iexec.tex
+	gsed -i "s|00\.00\.0000|$${date}|" iexec.tex
 	cp ../../.latexmkrc .
-	latexmk -pdf exec.tex
+	latexmk -pdf iexec.tex
 	rm .latexmkrc
 	rm -rf _minted-* *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.run.xml *.out *.exc
-	cat exec.sty | grep RequirePackage | gsed -e "s/.*{\(.\+\)}.*/hard \1/" > DEPENDS.txt
+	cat iexec.sty | grep RequirePackage | gsed -e "s/.*{\(.\+\)}.*/hard \1/" > DEPENDS.txt
 	cd ..
-	zip -r exec.zip *
-	cp exec.zip ..
+	zip -r iexec.zip *
+	cp iexec.zip ..
 	cd ..
 
 clean:

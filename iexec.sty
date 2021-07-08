@@ -21,7 +21,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{exec}[00.00.0000 0.0.0 Shell Executions]
+\ProvidesPackage{iexec}[00.00.0000 0.0.0 Inputable Shell Executions]
 
 \makeatletter\newcommand\exec[1]{%
   \begingroup%
@@ -33,10 +33,10 @@
 }\makeatother
 
 \newcommand\iexec[1]{%
-  \exec{#1 > exec.tmp}%
-  \exec{echo >> exec.tmp}%
-  \input{tt.exc}\unskip%
-  \exec{rm exec.tmp}%
+  \exec{#1 > iexec.tmp}%
+  \exec{echo >> iexec.tmp}%
+  \input{iexec.tmp}\unskip%
+  \exec{rm iexec.tmp}%
 }\makeatother
 
 \endinput
