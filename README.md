@@ -12,7 +12,7 @@ and then use in the preamble:
 \documentclass{article}
 \usepackage{exec}
 \begin{document}
-Today is \exec{date +\%e-\%b-\%Y}.
+Today is \iexec{date +\%e-\%b-\%Y}.
 \end{document}
 ```
 
