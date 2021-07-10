@@ -39,11 +39,10 @@
   \endgroup%
 }\makeatother
 
-\newcommand\iexec[1]{%
-  \newcommand*\iexecfile{iexec.tmp}
-  \exec{#1 > \iexecfile}%
-  \input{\iexecfile}\unskip%
-  \iftrace\else\exec{rm \iexecfile}\fi%
+\newcommand\iexec[2][iexec.tmp]{%
+  \exec{#2 > #1}%
+  \input{#1}\unskip%
+  \iftrace\else\exec{rm #1}\fi%
 }\makeatother
 
 \endinput

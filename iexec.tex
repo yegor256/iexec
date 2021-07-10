@@ -43,13 +43,13 @@ document and then put their output to the document:
 \setlength{\parskip}{0pt}
 \scriptsize
 \raggedcolumns
-\begin{verbatim}
+\begin{ffcode}
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
 Today is \iexec{date +\%e-\%b-\%Y}.
 \end{document}
-\end{verbatim}
+\end{ffcode}
 
 \columnbreak
 
@@ -62,6 +62,18 @@ in order to let \ff{ShellEscape} (the package we use) to run shell.
 There are two commands: \ff{\char`\\exec} and \ff{\char`\\iexec}.
 The first one executes, while the second one also inputs the output
 of the execution.
+
+The output of your code is saved into the file provided as the
+second optional argument of \ff{\char`\\exec} and \ff{\char`\\iexec}
+commands (the default value is \ff{iexec.tmp}):
+
+\begin{ffcode}
+Today is \iexec[date.txt]{date +\%e-\%b-\%Y}.
+\end{ffcode}
+
+The file specified will be deleted right after its usage. If you don't
+want this to happen, use \ff{trace} package option: all files will remain
+in the directory.
 
 More details about this package you can find
 in the \ff{yegor256/iexec} GitHub repository.
