@@ -51,7 +51,7 @@ zip: iexec.pdf iexec.sty
 	cp ../../.latexmkrc .
 	latexmk -pdf iexec.tex
 	rm .latexmkrc
-	rm -rf _minted-* *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.run.xml *.out *.exc
+	rm -rf _minted-* *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.run.xml *.out *.exc *.tmp
 	cat iexec.sty | grep RequirePackage | gsed -e "s/.*{\(.\+\)}.*/hard \1/" > DEPENDS.txt
 	cd ..
 	zip -r iexec.zip *
