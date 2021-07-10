@@ -59,13 +59,11 @@ Today is \iexec{date +\%e-\%b-\%Y}.
 You have to run \ff{pdflatex} (or just \ff{latex}) with the \ff{--shell-escape} flag
 in order to let \ff{ShellEscape} (the package we use) to run shell.
 
-There are two commands: \ff{\char`\\exec} and \ff{\char`\\iexec}.
-The first one executes, while the second one also inputs the output
-of the execution.
+If you don't want the output to be visible,
+use \ff{\char`\\phantom\char`\{\char`\\iexec\char`\{...\char`\}\char`\}}.
 
 The output of your code is saved into the file provided as the
-second optional argument of \ff{\char`\\exec} and \ff{\char`\\iexec}
-commands (the default value is \ff{iexec.tmp}):
+second optional argument of \ff{\char`\\iexec} (the default value is \ff{iexec.tmp}):
 
 \begin{ffcode}
 Today is \iexec[date.txt]{date +\%e-\%b-\%Y}.

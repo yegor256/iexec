@@ -30,17 +30,13 @@
 \DeclareOptionX{trace}{\tracetrue}
 \ProcessOptionsX\relax
 
-\makeatletter\newcommand\exec[1]{%
+\makeatletter\newcommand\iexec[2][iexec.tmp]{%
   \begingroup%
   \let\%\@percentchar%
   \let\{\@charlb%
   \let\}\@charrb%
-  \ShellEscape{#1}%
+  \ShellEscape{#2 > #1}%
   \endgroup%
-}\makeatother
-
-\newcommand\iexec[2][iexec.tmp]{%
-  \exec{#2 > #1}%
   \input{#1}\unskip%
   \iftrace\else\exec{rm #1}\fi%
 }\makeatother
