@@ -23,6 +23,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}[00.00.0000 0.0.0 Inputable Shell Executions]
 
+\RequirePackage{shellesc}
+
+\RequirePackage{xkeyval}
+\newif\iftrace
+\DeclareOptionX{trace}{\tracetrue}
+\ProcessOptionsX\relax
+
 \makeatletter\newcommand\exec[1]{%
   \begingroup%
   \let\%\@percentchar%
@@ -33,10 +40,10 @@
 }\makeatother
 
 \newcommand\iexec[1]{%
-  \exec{#1 > iexec.tmp}%
-  \exec{echo >> iexec.tmp}%
-  \input{iexec.tmp}\unskip%
-  \exec{rm iexec.tmp}%
+  \newcommand*\iexecfile{iexec.tmp}
+  \exec{#1 > \iexecfile}%
+  \input{\iexecfile}\unskip%
+  \iftrace\else\exec{rm \iexecfile}\fi%
 }\makeatother
 
 \endinput
