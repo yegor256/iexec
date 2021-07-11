@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/iexec/blob/master/LICENSE.txt)
 
 This LaTeX package helps you execute commands from the document and then input
-their output. The package uses [`ShellEscape`](https://ctan.org/pkg/shellesc) package.
+their output. The package uses [`shellesc`](https://ctan.org/pkg/shellesc) package.
 
 First, [install it](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages)
 from [CTAN](https://ctan.org/pkg/iexec) 
