@@ -3,6 +3,7 @@
 
 This LaTeX package helps you execute commands from the document and then input
 their output. The package uses [`shellesc`](https://ctan.org/pkg/shellesc) package.
+The development of this package was motivated by [this](https://stackoverflow.com/questions/3252957).
 
 First, [install it](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages)
 from [CTAN](https://ctan.org/pkg/iexec) 
