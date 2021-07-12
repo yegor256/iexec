@@ -30,7 +30,7 @@
 \DeclareOptionX{trace}{\tracetrue}
 \ProcessOptionsX\relax
 
-\makeatletter\newcommand\iexec[2][iexec.tmp]{%
+\newcommand\iexec[2][iexec.tmp]{%
   \begingroup%
   \let\%\@percentchar%
   \let\\\@backslashchar%
@@ -41,6 +41,6 @@
   \endgroup%
   \input{#1}%
   \iftrace\else\ShellEscape{rm #1}\fi%
-}\makeatother
+}
 
 \endinput
