@@ -33,12 +33,14 @@
 \makeatletter\newcommand\iexec[2][iexec.tmp]{%
   \begingroup%
   \let\%\@percentchar%
+  \let\\\@backslashchar%
   \let\{\@charlb%
   \let\}\@charrb%
   \ShellEscape{#2 > #1}%
+  \message{iexec executed shell command: [#2 > #1]}%
   \endgroup%
-  \input{#1}\unskip%
-  \iftrace\else\exec{rm #1}\fi%
+  \input{#1}%
+  \iftrace\else\ShellEscape{rm #1}\fi%
 }\makeatother
 
 \endinput

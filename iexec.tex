@@ -47,13 +47,13 @@ document and then put their output to the document:
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
-Today is \iexec{date +\%e-\%b-\%Y}.
+Today is \iexec{date +\%e-\%b-\%Y}
 \end{document}
 \end{ffcode}
 
 \columnbreak
 
-Today is \iexec{date +\%e-\%b-\%Y}.
+Today is \iexec{date +\%e-\%b-\%Y | tr -d '\\n'}
 \end{multicols}
 
 You have to run \ff{pdflatex} (or just \ff{latex}) with the \ff{--shell-escape} flag
@@ -66,8 +66,10 @@ The output of your code is saved into the file provided as the
 second optional argument of \ff{\char`\\iexec} (the default value is \ff{iexec.tmp}):
 
 \begin{ffcode}
-Today is \iexec[date.txt]{date +\%e-\%b-\%Y}.
+Today is \iexec[date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 \end{ffcode}
+
+The tailing part of the command here removes all ends-of-line.
 
 The file specified will be deleted right after its usage. If you don't
 want this to happen, use \ff{trace} package option: all files will remain
