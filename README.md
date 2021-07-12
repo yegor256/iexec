@@ -13,7 +13,7 @@ and then use in the preamble:
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
-Today is \iexec{date +\%e-\%b-\%Y}.
+Today is \iexec{date +\%e-\%b-\%Y | tr -d '\\n'}.
 \end{document}
 ```
 
