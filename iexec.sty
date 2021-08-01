@@ -31,6 +31,9 @@
 \ProcessOptionsX\relax
 
 \newcommand\iexec[2][iexec.tmp]{%
+  \ifnum\pdfshellescape=1\else
+    \PackageError{iexec}{You must run latex with --shell-escape option}{}
+  \fi
   \begingroup%
   \let\%\@percentchar%
   \let\\\@backslashchar%
