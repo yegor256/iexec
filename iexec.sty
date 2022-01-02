@@ -40,7 +40,7 @@
   \let\{\@charlb%
   \let\}\@charrb%
   \ShellEscape{#2 > #1}%
-  \message{iexec executed shell command: [#2 > #1]}%
+  \message{iexec: [#2 > #1]}%
   \endgroup%
   \input{#1}%
   \ifiexec@trace\else\ShellEscape{rm #1}\fi%
