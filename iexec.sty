@@ -1,6 +1,6 @@
 % (The MIT License)
 %
-% Copyright (c) 2021 Yegor Bugayenko
+% Copyright (c) 2021-2022 Yegor Bugayenko
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the 'Software'), to deal
@@ -26,11 +26,11 @@
 \RequirePackage{shellesc}
 
 \RequirePackage{xkeyval}
-\newif\iftrace
-\DeclareOptionX{trace}{\tracetrue}
-\ProcessOptionsX\relax
+\makeatletter\newif\ifiexec@trace
+\DeclareOptionX{trace}{\iexec@tracetrue}
+\ProcessOptionsX\relax\makeatother
 
-\newcommand\iexec[2][iexec.tmp]{%
+\makeatletter\newcommand\iexec[2][iexec.tmp]{%
   \ifnum\pdfshellescape=1\else
     \PackageError{iexec}{You must run latex with --shell-escape option}{}
   \fi
@@ -43,7 +43,7 @@
   \message{iexec executed shell command: [#2 > #1]}%
   \endgroup%
   \input{#1}%
-  \iftrace\else\ShellEscape{rm #1}\fi%
-}
+  \ifiexec@trace\else\ShellEscape{rm #1}\fi%
+}\makeatother
 
 \endinput
