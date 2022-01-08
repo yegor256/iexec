@@ -24,12 +24,15 @@
 
 .ONESHELL:
 
-all: iexec.pdf test zip
+all: iexec.pdf test copyright zip
 
 iexec.pdf: iexec.tex iexec.sty
 	latexmk -pdf $<
 	texsc $<
 	texqc --ignore 'You have requested document class' $<
+
+copyright:
+	grep -q -r "2021-$$(date +%Y)" --include '*.tex' --include '*.sty' --include 'Makefile' .
 
 test: tests/*.tex iexec.sty
 	cd tests && make && cd ..
