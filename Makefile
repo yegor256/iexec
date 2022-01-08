@@ -31,7 +31,7 @@ iexec.pdf: iexec.tex iexec.sty
 	texsc $<
 	texqc --ignore 'You have requested document class' $<
 
-test:
+test: tests/*.tex iexec.sty
 	cd tests && make && cd ..
 
 zip: iexec.pdf iexec.sty
@@ -41,7 +41,7 @@ zip: iexec.pdf iexec.sty
 	mkdir iexec
 	cd iexec
 	cp ../../README.md .
-	version=$$(cat ../../VERSION.txt)
+	version=$$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/yegor256/iexec/releases/latest | jq -r '.tag_name')
 	echo "Version is: $${version}"
 	date=$$(date +%Y/%m/%d)
 	echo "Date is: $${date}"
