@@ -1,6 +1,6 @@
 # (The MIT License)
 #
-# Copyright (c) 2021-2022 Yegor Bugayenko
+# Copyright (c) 2021 Yegor Bugayenko
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the 'Software'), to deal
@@ -20,47 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.SHELLFLAGS = -e -x -c
+TEXS=$(wildcard *.tex)
+PDFS=$(TEXS:.tex=.pdf)
 
-.ONESHELL:
+all: $(PDFS)
 
-all: iexec.pdf test zip
-
-iexec.pdf: iexec.tex iexec.sty
-	latexmk -pdf $<
-	texsc $<
-	texqc --ignore 'You have requested document class' $<
-
-test:
-	cd tests && make && cd ..
-
-zip: iexec.pdf iexec.sty
-	rm -rf package
-	mkdir package
-	cd package
-	mkdir iexec
-	cd iexec
-	cp ../../README.md .
-	version=$$(cat ../../VERSION.txt)
-	echo "Version is: $${version}"
-	date=$$(date +%Y/%m/%d)
-	echo "Date is: $${date}"
-	cp ../../iexec.sty .
-	gsed -i "s|0\.0\.0|$${version}|" iexec.sty
-	gsed -i "s|00\.00\.0000|$${date}|" iexec.sty
-	cp ../../iexec.tex .
-	gsed -i "s|0\.0\.0|$${version}|" iexec.tex
-	gsed -i "s|00\.00\.0000|$${date}|" iexec.tex
-	cp ../../.latexmkrc .
-	latexmk -pdf iexec.tex
-	rm .latexmkrc
-	rm -rf _minted-* *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.run.xml *.out *.exc *.tmp
-	cat iexec.sty | grep RequirePackage | gsed -e "s/.*{\(.\+\)}.*/hard \1/" > DEPENDS.txt
-	cd ..
-	zip -r iexec-$${version}.zip *
-	cp iexec-$${version}.zip ..
-	cd ..
+%.pdf: %.tex
+	latexmk -pdf "$<"
 
 clean:
 	git clean -dfX
-	cd tests && make clean && cd ..
+

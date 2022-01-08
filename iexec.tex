@@ -66,7 +66,7 @@ The output of your code is saved into the file provided as the
 second optional argument of \ff{\char`\\iexec} (the default value is \ff{iexec.tmp}):
 
 \begin{ffcode}
-Today is \iexec[date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
+Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 \end{ffcode}
 
 The tailing part of the command here removes all ends-of-line.
@@ -74,6 +74,14 @@ The tailing part of the command here removes all ends-of-line.
 The file specified will be deleted right after its usage. If you don't
 want this to happen, use \ff{trace} package option: all files will remain
 in the directory.
+
+There are a few options you can provide for the \ff{\char`\\iexec} command:
+
+\begin{itemize}
+    \item \ff{trace}: to prevent the deletion of the file;
+    \item \ff{stdout=...}: to set the name of the file where the standard output of the command will be saved;
+    \item \ff{quiet}: to prevent including of the content into the document.
+\end{itemize}
 
 More details about this package you can find
 in the \ff{yegor256/iexec} GitHub repository.

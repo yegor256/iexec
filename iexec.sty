@@ -24,26 +24,52 @@
 \ProvidesPackage{iexec}[00.00.0000 0.0.0 Inputable Shell Executions]
 
 \RequirePackage{shellesc}
-
+\RequirePackage{pgfkeys}
 \RequirePackage{xkeyval}
+
 \makeatletter\newif\ifiexec@trace
 \DeclareOptionX{trace}{\iexec@tracetrue}
 \ProcessOptionsX\relax\makeatother
 
-\makeatletter\newcommand\iexec[2][iexec.tmp]{%
-  \ifnum\pdfshellescape=1\else
-    \PackageError{iexec}{You must run latex with --shell-escape option}{}
-  \fi
+\makeatletter\pgfkeys{
+  /iexec/.is family,
+  /iexec,
+  stdout/.estore in = \iexec@stdout,
+  stdout/.default = iexec.tmp,
+  trace/.estore in = \iexec@traceit,
+  quiet/.estore in = \iexec@quiet,
+  stdout
+}\makeatother
+
+\makeatletter\newcommand\iexec[2][]{%
+  \pgfkeys{/iexec, #1}%
+  \ifnum\pdfshellescape=1\else%
+    \PackageError{iexec}{You must run latex with --shell-escape option}{}%
+  \fi%
   \begingroup%
-  \let\%\@percentchar%
-  \let\\\@backslashchar%
-  \let\{\@charlb%
-  \let\}\@charrb%
-  \ShellEscape{#2 > #1}%
-  \message{iexec: [#2 > #1]}%
+    \let\%\@percentchar%
+    \let\\\@backslashchar%
+    \let\{\@charlb%
+    \let\}\@charrb%
+    \ShellEscape{#2 > \iexec@stdout}%
+    \message{iexec: [#2 > \iexec@stdout]}%
   \endgroup%
-  \input{#1}%
-  \ifiexec@trace\else\ShellEscape{rm #1}\fi%
+  \ifdefined\iexec@quiet
+    \message{iexec: Due to 'quiet' we didn't read the content of '\iexec@stdout'}%
+  \else%
+    \input{\iexec@stdout}%
+    \message{iexec: The content of '\iexec@stdout' was included into the document}%
+  \fi%
+  \ifiexec@trace%
+    \message{iexec: Due to package option 'trace', the file '\iexec@stdout' was not deleted}%
+  \else%
+    \ifdefined\iexec@traceit%
+      \message{iexec: Due to 'trace' option, the file '\iexec@stdout' was not deleted}%
+    \else%
+      \ShellEscape{rm \iexec@stdout}%
+      \message{iexec: The file '\iexec@stdout' was deleted}%
+    \fi%
+  \fi%
 }\makeatother
 
 \endinput
