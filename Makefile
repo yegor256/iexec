@@ -36,9 +36,7 @@ copyright:
 	find . -name '*.tex' -o -name '*.sty' -o -name 'Makefile' | xargs -n1 grep -r "(c) 2021-$$(date +%Y) "
 
 test: tests/*.tex $(NAME).sty
-	if [ -d tests ]; then
-		cd tests && make && cd ..
-	fi
+	cd tests && make && cd ..
 
 zip: $(NAME).pdf $(NAME).sty
 	rm -rf package
