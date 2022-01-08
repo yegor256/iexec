@@ -52,22 +52,22 @@
     \let\{\@charlb%
     \let\}\@charrb%
     \ShellEscape{#2 > \iexec@stdout}%
-    \message{iexec: [#2 > \iexec@stdout]}%
+    \message{^^Jiexec: [#2 > \iexec@stdout]}%
   \endgroup%
   \ifdefined\iexec@quiet
-    \message{iexec: Due to 'quiet' we didn't read the content of '\iexec@stdout'}%
+    \message{^^Jiexec: Due to 'quiet' we didn't read the content of '\iexec@stdout'}%
   \else%
     \input{\iexec@stdout}%
-    \message{iexec: The content of '\iexec@stdout' was included into the document}%
+    \message{^^Jiexec: The content of '\iexec@stdout' was included into the document}%
   \fi%
   \ifiexec@trace%
-    \message{iexec: Due to package option 'trace', the file '\iexec@stdout' was not deleted}%
+    \message{^^Jiexec: Due to package option 'trace', the file '\iexec@stdout' was not deleted}%
   \else%
     \ifdefined\iexec@traceit%
-      \message{iexec: Due to 'trace' option, the file '\iexec@stdout' was not deleted}%
+      \message{^^Jiexec: Due to 'trace' option, the file '\iexec@stdout' was not deleted}%
     \else%
       \ShellEscape{rm \iexec@stdout}%
-      \message{iexec: The file '\iexec@stdout' was deleted}%
+      \message{^^Jiexec: The file '\iexec@stdout' was deleted}%
     \fi%
   \fi%
 }\makeatother
