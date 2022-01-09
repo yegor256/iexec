@@ -33,7 +33,7 @@ checks:
 	grep -r "\[$$(whoami) \]" simple-bash.txt
 	grep -r "\[5 \]" num-to-length.txt
 	[ -e a.txt ]
-	[ -e iexec.tmp ]
+	[ ! -e iexec.tmp ]
 
 clean:
 	git clean -dfX
