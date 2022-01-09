@@ -42,7 +42,9 @@
 }\makeatother
 
 \makeatletter\newcommand\iexec[2][]{%
-  \pgfkeys{/iexec, #1}%
+  \let\iexec@traceit\undefined%
+  \let\iexec@quiet\undefined%
+  \pgfkeys{/iexec, stdout, #1}%
   \ifnum\pdfshellescape=1\else%
     \PackageError{iexec}{You must run latex with --shell-escape option}{}%
   \fi%

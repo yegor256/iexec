@@ -23,10 +23,17 @@
 TEXS=$(wildcard *.tex)
 PDFS=$(TEXS:.tex=.pdf)
 
-all: $(PDFS)
+all: $(PDFS) checks
 
 %.pdf: %.tex
-	latexmk -pdf "$<"
+	pdflatex -shell-escape -halt-on-error "$<" > /dev/null 2>&1
+
+checks:
+	for f in $$(ls *.pdf); do pdftotext $${f}; done
+	grep -r "\[$$(whoami) \]" simple-bash.txt
+	grep -r "\[5 \]" num-to-length.txt
+	[ -e a.txt ]
+	[ -e iexec.tmp ]
 
 clean:
 	git clean -dfX
