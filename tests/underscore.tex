@@ -23,4 +23,5 @@
 \usepackage{../iexec}
 \begin{document}
 \iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world"}
+\iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
 \end{document}
