@@ -43,38 +43,6 @@
 % \GetFileInfo{iexec.dtx}
 % \DoNotIndex{\newcommand,\newenvironment}
 
-% \title{\ff{iexec}: \LaTeX{} Package \\ for Inputable Shell Executions}
-% \author{Yegor Bugayenko \\ \texttt{yegor256@gmail.com}}
-% \date{\filedate, \fileversion}
-%
-% \maketitle
-%
-% \section{Introduction}
-%
-% This package helps you execute shell commands right from the
-% document and then put their output to the document:
-%
-% \begin{multicols}{2}
-% \setlength{\parskip}{0pt}
-% \scriptsize
-% \raggedcolumns
-% \begin{ffcode}
-% \documentclass{article}
-% \usepackage{iexec}
-% \begin{document}
-% Today is \iexec{date +\%e-\%b-\%Y}
-% \end{document}
-% \end{ffcode}
-%
-% \columnbreak
-%
-% hello
-% \end{multicols}
-
-% \StopEventually{}
-
-% \section{Implementation}
-
 % \iffalse
 %<*driver>
 \ProvidesFile{iexec.dtx}
@@ -86,8 +54,14 @@
 %</package>
 %<*driver>
 \documentclass{ltxdoc}
+\usepackage[tt=false, type1=true]{libertine}
 \usepackage{iexec}
 \usepackage{ffcode}
+\usepackage{href-ul}
+\raggedbottom
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{32pt}
+\setlength{\parskip}{6pt}
 \PageIndex
 \EnableCrossrefs
 \CodelineIndex
@@ -100,10 +74,104 @@
 %</driver>
 % \fi
 
+% \title{|iexec|: \LaTeX{} Package \\ for Inputable Shell Executions\thanks{The sources are in GitHub at \href{https://github.com/yegor256/iexec}{yegor256/iexec}}}
+% \author{Yegor Bugayenko \\ \texttt{yegor256@gmail.com}}
+% \date{\filedate, \fileversion}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% This package helps you execute shell commands right from the
+% document and then put their output to the document:
+%
+% \begin{multicols}{2}
+% \setlength{\parskip}{0pt}
+% \small
+% \raggedcolumns
+%\iffalse
+%<*verb>
+%\fi
+\begin{ffcode}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+Today is
+  \iexec{date +\%e-\%b-\%Y}
+\end{document}
+\end{ffcode}
+%\iffalse
+%</verb>
+%\fi
+%
+% \columnbreak
+%
+% Today is \iexec{date +\%e-\%b-\%Y}
+% \end{multicols}
+
+% \begin{macro}{\iexec}
+% The only command provided by this package is |\iexec| \oarg{options} \marg{cmd}.
+% It's only mandatory argument \meta{cmd} is the command to be executed
+% through the terminal shell (bash, or whatever is set as the default one
+% on your user console).
+% \end{macro}
+
+% You have to run |pdflatex| (or just |latex|)
+% with the |--shell-escape| flag
+% in order to let |shellesc| (the package we use) to run shell.
+
+% \begin{macro}{quiet}
+% If you don't want the output to be visible,
+% use |\phantom\{\iexec{...}}|.
+% Otherwise, you can use |quiet| option:
+%\iffalse
+%<*verb>
+%\fi
+\begin{ffcode}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+I just want to delete some file:
+\iexec[quiet]{rm -f foo.txt}
+\end{document}
+\end{ffcode}
+%\iffalse
+%</verb>
+%\fi
+% \end{macro}
+
+% \begin{macro}{stdout}
+% The output of your code is saved into the file provided as the
+%second optional argument of |\iexec| (the default value is |iexec.tmp|):
+%\iffalse
+%<*verb>
+%\fi
+\begin{ffcode}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
+\end{document}
+\end{ffcode}
+%\iffalse
+%</verb>
+%\fi
+% The tailing part of the command here removes all ends-of-line.
+% \end{macro}
+
+% \begin{macro}{trace}
+% The file specified will be deleted right after its usage. If you don't
+% want this to happen, use |trace| package option: all files will remain
+% in the directory where they were created.
+% \end{macro}
+
+% \StopEventually{}
+
+% \section{Implementation}
+
 % \changes{v0.1}{2021/01/18}{Initial version}
 
 % \iffalse
-%<*package>
 \RequirePackage{shellesc}
 \RequirePackage{pgfkeys}
 \RequirePackage{xkeyval}
@@ -119,36 +187,58 @@
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
+% \fi
 
 % \begin{macro}{\iexec}
-% The |\iexec| macro executed a given command through command line shell.
+% It is implemented with the help of |\ShellEscape| from |shellesc| package:
 %    \begin{macrocode}
 \makeatletter\newcommand\iexec[2][]{%
   \begingroup
     \pgfqkeys{/iexec}{#1}%
+%    \end{macrocode}
+% First, we verify that |latex| is running with |--shell-escape| option. Without
+% it nothing will work, so it's better to throw an error earlier than later.
+%    \begin{macrocode}
     \ifnum\pdfshellescape=1\else%
-      \PackageError{iexec}{You must run latex with --shell-escape option}{}%
+      \PackageError{iexec}{You must run latex with
+      --shell-escape option}{}%
     \fi%
     \begingroup%
-      % see https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf
+%    \end{macrocode}
+% Then, we define a few special chars in order to escape them in the shell. The full
+% list of them is in \href{https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf}{macros2e}.
+%    \begin{macrocode}
       \let\%\@percentchar%
       \let\\\@backslashchar%
       \let\{\@charlb%
       \let\}\@charrb%
+%    \end{macrocode}
+% Then, we execute it:
+%    \begin{macrocode}
       \ShellEscape{#2 > \iexec@stdout}%
+%    \end{macrocode}
+% Then, a message is printed to TeX log:
+%    \begin{macrocode}
       \message{^^Jiexec: [#2 > \iexec@stdout]^^J}%
     \endgroup%
+%    \end{macrocode}
+% Finally, a few post-mortem steps:
+%    \begin{macrocode}
     \ifdefined\iexec@quiet
-      \message{^^Jiexec: Due to 'quiet' we didn't read the content of '\iexec@stdout'^^J}%
+      \message{^^Jiexec: Due to 'quiet' we didn't read
+      the content of '\iexec@stdout'^^J}%
     \else%
       \input{\iexec@stdout}%
-      \message{^^Jiexec: The content of '\iexec@stdout' was included into the document^^J}%
+      \message{^^Jiexec: The content of '\iexec@stdout'
+      was included into the document^^J}%
     \fi%
     \ifiexec@trace%
-      \message{^^Jiexec: Due to package option 'trace', the file '\iexec@stdout' was not deleted^^J}%
+      \message{^^Jiexec: Due to package option 'trace',
+      the file '\iexec@stdout' was not deleted^^J}%
     \else%
       \ifdefined\iexec@traceit%
-        \message{^^Jiexec: Due to 'trace' option, the file '\iexec@stdout' was not deleted^^J}%
+        \message{^^Jiexec: Due to 'trace' option,
+        the file '\iexec@stdout' was not deleted^^J}%
       \else%
         \ShellEscape{rm \iexec@stdout}%
         \message{^^Jiexec: The file '\iexec@stdout' was deleted^^J}%
@@ -158,9 +248,6 @@
 }\makeatother
 %    \end{macrocode}
 % \end{macro}
-
-%</package>
-% \fi
 
 % \Finale
 
