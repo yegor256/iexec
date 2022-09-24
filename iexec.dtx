@@ -119,6 +119,8 @@ Today is
 % with the |--shell-escape| flag
 % in order to let |shellesc| (the package we use) to run shell.
 
+% \section{Options}
+
 % \begin{macro}{quiet}
 % If you don't want the output to be visible,
 % use |\phantom\{\iexec{...}}|.
@@ -213,8 +215,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   \begingroup
     \pgfqkeys{/iexec}{#1}%
 %    \end{macrocode}
-% First, we verify that |latex| is running with |--shell-escape| option. Without
-% it nothing will work, so it's better to throw an error earlier than later.
+% First, we verify that |latex| is running with |--shell-escape| option, since without
+% it nothing will work; so, it's better to throw an error earlier than later:
 %    \begin{macrocode}
     \ifnum\pdfshellescape=1\else%
       \PackageError{iexec}{You must run latex with
@@ -222,8 +224,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
     \fi%
     \begingroup%
 %    \end{macrocode}
-% Then, we define a few special chars in order to escape them in the shell. The full
-% list of them is in \href{https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf}{macros2e}.
+% Then, we define a few special chars in order to escape them in the shell
+% (the full
+% list of them is in \href{https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf}{macros2e}):
 %    \begin{macrocode}
       \let\%\@percentchar%
       \let\\\@backslashchar%
