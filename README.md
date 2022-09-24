@@ -1,4 +1,5 @@
 [![make](https://github.com/yegor256/iexec/actions/workflows/latexmk.yml/badge.svg)](https://github.com/yegor256/iexec/actions/workflows/latexmk.yml)
+[![CTAN](https://img.shields.io/ctan/v/iexec)](https://ctan.org/pkg/iexec)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/iexec/blob/master/LICENSE.txt)
 
 This LaTeX package helps you execute commands from the document and then input
