@@ -1,6 +1,6 @@
 .DS_Store
 target/
-_minted-*
+_minted-*/
 *.zip
 *.toc
 *.pdf
@@ -11,6 +11,8 @@ _minted-*
 *.sty
 *.fdb_latexmk
 *.fls
+*.aux
+*.pug
 *.log
 *.run.xml
 *.aux
