@@ -1,0 +1,16 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{iexec}
+\START
+\showoutput
+
+\iexec[trace,quiet,stdout=a.txt]{echo 5}
+\iexec[trace,quiet]{echo 6}
+\newread\foo
+\openin\foo=a.txt
+\read\foo to \y
+\setlength\parskip{1pt * \y}
+
+Hello, [\y]!
+
+\END

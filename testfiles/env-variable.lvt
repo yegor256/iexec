@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{iexec}
+\START
+\showoutput
+
+\iexec[stdout=env.txt]{echo $HOME}
+\iexec[stdout=env.txt]{echo ${HOME}}
+
+\END

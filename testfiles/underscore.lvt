@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{iexec}
+\START
+\showoutput
+
+\iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world"}
+\iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
+
+\END
