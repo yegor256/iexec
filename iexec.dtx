@@ -56,7 +56,6 @@
 \documentclass{ltxdoc}
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage{iexec}
-\usepackage{ffcode}
 \usepackage{href-ul}
 \raggedbottom
 \setlength{\parindent}{0pt}
@@ -92,14 +91,14 @@
 %\iffalse
 %<*verb>
 %\fi
-\begin{ffcode}
+\begin{verbatim}
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
 Today is
   \iexec{date +\%e-\%b-\%Y}
 \end{document}
-\end{ffcode}
+\end{verbatim}
 %\iffalse
 %</verb>
 %\fi
@@ -127,14 +126,14 @@ Today is
 %\iffalse
 %<*verb>
 %\fi
-\begin{ffcode}
+\begin{verbatim}
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
 I just want to delete some file:
 \iexec[quiet]{rm -f foo.txt}
 \end{document}
-\end{ffcode}
+\end{verbatim}
 %\iffalse
 %</verb>
 %\fi
@@ -146,13 +145,13 @@ I just want to delete some file:
 %\iffalse
 %<*verb>
 %\fi
-\begin{ffcode}
+\begin{verbatim}
 \documentclass{article}
 \usepackage{iexec}
 \begin{document}
 Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 \end{document}
-\end{ffcode}
+\end{verbatim}
 %\iffalse
 %</verb>
 %\fi
