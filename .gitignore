@@ -1,14 +1,19 @@
 .DS_Store
-target/
-_minted-*
+build/
+_minted-*/
+iexec.tex
 *.zip
 *.toc
 *.pdf
 *.bbl
 *.bcf
 *.blg
+*.glo
+*.sty
 *.fdb_latexmk
 *.fls
+*.aux
+*.pug
 *.log
 *.run.xml
 *.aux
@@ -20,5 +25,4 @@ _minted-*
 *.ind
 *.exc
 *.synctex.gz
-package/
 *.tmp
