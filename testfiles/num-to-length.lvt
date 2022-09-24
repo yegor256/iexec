@@ -1,6 +1,7 @@
 \input{regression-test.tex}
 \documentclass{article}
 \usepackage{iexec}
+\begin{document}
 \START
 \showoutput
 
