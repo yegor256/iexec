@@ -8,6 +8,7 @@ _minted-*
 *.bcf
 *.blg
 *.glo
+*.sty
 *.fdb_latexmk
 *.fls
 *.log
