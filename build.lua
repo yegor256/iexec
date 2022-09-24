@@ -1,7 +1,6 @@
 module = "iexec"
 typesetopts = "--interaction=batchmode --shell-escape"
 checkopts = "--interaction=batchmode --shell-escape"
--- checkengines = {"pdftex"}
 
 uploadconfig = {
   pkg = "iexec",

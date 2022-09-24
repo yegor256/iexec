@@ -15,7 +15,6 @@ merge:
     l3build check
 release:
   script: |-
-    l3build check
     l3build tag ${tag}
     git commit -am "version set to ${tag}"
     l3build ctan

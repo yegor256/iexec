@@ -140,10 +140,12 @@ I just want to delete some file:
 %</verb>
 %\fi
 % \end{macro}
+% In this case, whatever the shell command produces will not be included
+% into the document.
 
 % \begin{macro}{stdout}
 % The output of your code is saved into the file provided as the
-%second optional argument of |\iexec| (the default value is |iexec.tmp|):
+% second optional argument of |\iexec| (the default value is |iexec.tmp|):
 %\iffalse
 %<*verb>
 %\fi
@@ -242,7 +244,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \message{^^Jiexec: [#2 > \iexec@stdout]^^J}%
     \endgroup%
 %    \end{macrocode}
-% Finally, a few post-mortem steps:
+% Then, include the produced output into the current document:
 %    \begin{macrocode}
     \ifdefined\iexec@quiet
       \message{^^Jiexec: Due to 'quiet' we didn't read
@@ -252,6 +254,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \message{^^Jiexec: The content of '\iexec@stdout'
       was included into the document^^J}%
     \fi%
+%    \end{macrocode}
+% Finally, delete the file or leave it untouched:
+%    \begin{macrocode}
     \ifiexec@trace%
       \message{^^Jiexec: Due to package option 'trace',
       the file '\iexec@stdout' was not deleted^^J}%
