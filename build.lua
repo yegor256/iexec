@@ -19,3 +19,10 @@ uploadconfig = {
   support = "https://github.com/yegor256/iexec",
   topic = "verbatim"
 }
+
+function update_tag (file , content , tagname , tagdate)
+  if string.match(file, "%.dtx$") then
+    return string.gsub(content, "0%.0%.0", tagname)
+  end
+  return content
+end
