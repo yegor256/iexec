@@ -12,7 +12,7 @@ install: |-
   sudo tlmgr --verify-repo=none install libertine minted fvextra framed tcolorbox environ catchfile xstring xkeyval
 release:
   script: |-
-    make VERSION=${tag} set-version
+    l3build tag ${tag}
     git commit -am "version set to ${tag}"
-    make
+    l3build ctan
     echo 'y' | l3build upload --halt-on-error
