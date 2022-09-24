@@ -19,7 +19,7 @@ Today is \iexec{date +\%e-\%b-\%Y | tr -d '\\n'}.
 ```
 
 The full example and all commands are available in the 
-[`iexec.tex`](https://github.com/yegor256/exec/blob/master/iexec.tex) file.
+[`iexec.pdf`](https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/iexec/iexec.pdf) file.
 
 If you want to contribute yourself, make a fork, then create a branch, 
 then run `make` in the root directory.
