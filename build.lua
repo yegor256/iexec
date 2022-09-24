@@ -1,4 +1,5 @@
 module = "iexec"
+typesetopts = "--interaction=batchmode --shell-escape"
 uploadconfig = {
   pkg = "iexec",
   version = "0.0.0",

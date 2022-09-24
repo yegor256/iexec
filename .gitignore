@@ -1,5 +1,5 @@
 .DS_Store
-target/
+build/
 _minted-*/
 iexec.tex
 *.zip
@@ -25,5 +25,4 @@ iexec.tex
 *.ind
 *.exc
 *.synctex.gz
-package/
 *.tmp

@@ -41,7 +41,7 @@
 %   Right brace   \}     Tilde         \~}
 
 % \GetFileInfo{iexec.dtx}
-% \DoNotIndex{\newcommand,\newenvironment}
+% \DoNotIndex{\endgroup,\begingroup,\let,\else,\fi,\newcommand,\newenvironment}
 
 % \iffalse
 %<*driver>
@@ -162,13 +162,31 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 % The file specified will be deleted right after its usage. If you don't
 % want this to happen, use |trace| package option: all files will remain
 % in the directory where they were created.
+% It's possible to turn tracing on globbaly, for the entire document, using
+% |trace| option of the package:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage[trace]{iexec}
+\begin{document}
+This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
 % \end{macro}
 
 % \StopEventually{}
 
 % \section{Implementation}
 
-% \changes{v0.1}{2021/01/18}{Initial version}
+% \changes{v0.2.0}{2021/07/10}{Initial version}
+% \changes{v0.4.0}{2021/08/01}{Runtime verification for --shell-escape option}
+% \changes{v0.4.1}{2021/08/08}{Options trace, stdout, and quiet added}
+% \changes{v0.5.0}{2022/01/08}{Major bug fixes}
 
 % \iffalse
 \RequirePackage{shellesc}
