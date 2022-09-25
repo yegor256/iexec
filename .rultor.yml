@@ -14,5 +14,4 @@ release:
   script: |-
     l3build tag ${tag}
     git commit -am "version set to ${tag}"
-    l3build ctan
-    echo 'y' | l3build upload --halt-on-error
+    l3build upload --halt-on-error

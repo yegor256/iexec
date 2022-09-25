@@ -4,6 +4,7 @@ checkopts = "--interaction=batchmode --shell-escape"
 
 uploadconfig = {
   pkg = "iexec",
+  ctanupload = true,
   version = "0.0.0",
   author = "Yegor Bugayenko",
   uploader = "Yegor Bugayenko",
