@@ -9,12 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/cache@v2
-        with:
-          path: ~/texlive
-          key: texlive2022-v0-
-          restore-keys: texlive2022-v0-
-      - uses: zauguin/install-texlive@v1
+      - uses: teatimeguest/setup-texlive-action@v2
         with:
           packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf
       - run: l3build ctan -q --show-log-on-error
