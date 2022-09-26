@@ -12,4 +12,4 @@ jobs:
       - uses: teatimeguest/setup-texlive-action@v2
         with:
           packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build
-      - run: l3build ctan -q --show-log-on-error
+      - run: l3build check -q --show-log-on-error
