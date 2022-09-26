@@ -11,5 +11,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: teatimeguest/setup-texlive-action@v2
         with:
-          packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf
+          packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build
       - run: l3build ctan -q --show-log-on-error
