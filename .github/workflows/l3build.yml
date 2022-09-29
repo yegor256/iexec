@@ -13,6 +13,7 @@ jobs:
         with:
           packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build
       - run: echo $(which pdflatex)
+      - run: pdflatex --version
       - run: echo $PATH
       - run: ln -s $(which pdflatex) /usr/bin/pdftex
       - run: pdftex --version
