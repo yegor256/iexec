@@ -13,4 +13,5 @@ jobs:
         with:
           packages: ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build
       - run: ln -s $(which pdflatex) /usr/bin/pdftex
+      - run: pdftex --version
       - run: l3build check -q --show-log-on-error
