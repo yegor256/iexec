@@ -17,4 +17,4 @@ release:
     texsc
     texqc
     git commit -am "version set to ${tag}"
-    l3build upload --halt-on-error
+    echo 'y' | l3build upload --halt-on-error
