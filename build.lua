@@ -2,6 +2,7 @@ module = "iexec"
 ctanupload = true
 typesetopts = "--interaction=batchmode --shell-escape"
 checkopts = "--interaction=batchmode --shell-escape"
+tagfiles = {"build.lua", "iexec.dtx"}
 
 uploadconfig = {
   pkg = "iexec",
@@ -24,12 +25,8 @@ uploadconfig = {
 }
 
 function update_tag(file, content, tagname, tagdate)
-  if string.match(file, "%.dtx$") or string.match(file, "%.lua$") then
-    return string.gsub(
-      string.gsub(content, "0%.0%.0", tagname),
-      "00%.00%.0000", os.date("%d.%m.%Y")
-    )
-
-  end
-  return content
+  return string.gsub(
+    string.gsub(content, "0%.0%.0", tagname),
+    "00%.00%.0000", os.date("%d.%m.%Y")
+  )
 end
