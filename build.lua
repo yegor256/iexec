@@ -21,7 +21,7 @@ uploadconfig = {
   summary = "Execute shell commands and input their output",
   repository = "https://github.com/yegor256/iexec",
   support = "",
-  topic = "verbatim"
+  topic = {"verbatim", "exec-foreign"}
 }
 
 function update_tag(file, content, tagname, tagdate)
