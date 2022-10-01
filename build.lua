@@ -13,18 +13,18 @@ uploadconfig = {
   announcement = "",
   ctanPath = "/macros/latex/contrib/iexec",
   bugtracker = "https://github.com/yegor256/iexec/issues",
-  home = "https://github.com/yegor256/iexec",
+  home = "",
   description = "With the help of the \\iexec command, you can execute a shell command and then input its output into your document. This package also lets you use any special symbols inside your command.",
-  development = "https://github.com/yegor256/iexec",
+  development = "",
   license = "mit",
   summary = "Execute shell commands and input their output",
   repository = "https://github.com/yegor256/iexec",
-  support = "https://github.com/yegor256/iexec",
+  support = "",
   topic = "verbatim"
 }
 
-function update_tag (file , content , tagname , tagdate)
-  if string.match(file, "%.dtx$") then
+function update_tag(file, content, tagname, tagdate)
+  if string.match(file, "%.dtx$") || string.match(file, "%.lua$") then
     return string
       .gsub(content, "0%.0%.0", tagname)
       .gsub(content, "00%.00%.0000", os.date("%d.%m.%Y"))
