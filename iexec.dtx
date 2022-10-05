@@ -190,9 +190,14 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{v0.4.1}{2021/08/08}{Options trace, stdout, and quiet added}
 % \changes{v0.5.0}{2022/01/08}{Major bug fixes}
 
-% \iffalse
+% First, we include a few packages:
+%    \begin{macrocode}
 \RequirePackage{shellesc}
 \RequirePackage{pgfkeys}
+%    \end{macrocode}
+
+% Then, we parse package options:
+%    \begin{macrocode}
 \RequirePackage{xkeyval}
 \makeatletter\newif\ifiexec@trace
 \DeclareOptionX{trace}{\iexec@tracetrue}
@@ -206,9 +211,10 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
-% \fi
+%    \end{macrocode}
 
 % \begin{macro}{\iexec}
+% Then, we define |\iexec| command.
 % It is implemented with the help of |\ShellEscape| from |shellesc| package:
 %    \begin{macrocode}
 \makeatletter\newcommand\iexec[2][]{%
