@@ -25,3 +25,16 @@ iexec: [echo "hello_world" > iexec.tmp]
 iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp'
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
+runsystem(../echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp)...ex
+ecuted
+iexec: [/bin/echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp]
+iexec: We include the content of 'iexec.tmp'...
+(iexec.tmp
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line ....
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line ....
+) 
+iexec: The content of 'iexec.tmp' was included into the document
+runsystem(rm iexec.tmp)...executed
+iexec: The file 'iexec.tmp' was deleted

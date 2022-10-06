@@ -8,5 +8,6 @@
 \iexec[stdout=sanity.txt]{echo 42}
 \iexec[trace]{echo "it's me" | cat}
 \iexec[quiet]{echo "hello_world"}
+\iexec{/bin/echo '\\begin{equation}\\pi = 3.14\\end{equation}'}
 
 \END
