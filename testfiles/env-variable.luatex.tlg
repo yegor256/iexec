@@ -2,11 +2,11 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 runsystem(echo $HOME > env1.txt)...executed
 iexec: [echo $HOME > env1.txt]
-iexec: Due to 'quiet' we didn't read the content of 'env1.txt'
+iexec: Due to 'quiet' option we didn't read the content of 'env1.txt'
 runsystem(rm env1.txt)...executed
 iexec: The file 'env1.txt' was deleted
 runsystem(echo ${HOME} > env2.txt)...executed
 iexec: [echo ${HOME} > env2.txt]
-iexec: Due to 'quiet' we didn't read the content of 'env2.txt'
+iexec: Due to 'quiet' option we didn't read the content of 'env2.txt'
 runsystem(rm env2.txt)...executed
 iexec: The file 'env2.txt' was deleted

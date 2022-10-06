@@ -225,7 +225,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % it nothing will work; so, it's better to throw an error earlier than later:
 %    \begin{macrocode}
     \ifdefined\pdfshellescape\ifnum\pdfshellescape=1\else%
-      \PackageError{iexec}{You must run latex with
+      \PackageError{iexec}{You must run TeX processor with
       --shell-escape option}{}%
     \fi\fi%
     \begingroup%
@@ -251,9 +251,11 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % Then, include the produced output into the current document:
 %    \begin{macrocode}
     \ifdefined\iexec@quiet
-      \message{^^Jiexec: Due to 'quiet' we didn't read
+      \message{^^Jiexec: Due to 'quiet' option we didn't read
       the content of '\iexec@stdout'^^J}%
     \else%
+      \message{^^Jiexec: We include the content of
+        '\iexec@stdout'...^^J}%
       \input{\iexec@stdout}%
       \message{^^Jiexec: The content of '\iexec@stdout'
       was included into the document^^J}%
