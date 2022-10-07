@@ -13,11 +13,13 @@ Hello, [\iexec{whoami}]!
 \iexec[quiet]{echo "hello_world"}
 \iexec{/bin/echo '\\begin{equation}\\pi = 3.14\\end{equation}'}
 
-\iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world~"}
+\iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world"}
 \iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
 
 \iexec[quiet,stdout=env1.txt]{echo $HOME}
 \iexec[quiet,stdout=env2.txt]{echo ${HOME}}
+
+\iexec[quiet]{echo '\%\\\{\}'}
 
 \iexec[trace,quiet,stdout=a.txt]{echo 5}
 \iexec[trace,quiet]{echo 6}

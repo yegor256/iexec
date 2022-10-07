@@ -106,14 +106,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
-runsystem(echo "hello_world\protect \unhbox \voidb@x \protect \penalty \@M \ {}"
- > underscore.txt)...executed
-iexec: [echo "hello_world\protect \unhbox \voidb@x \protect \penalty \@M \ {}" > underscore.txt]
+runsystem(echo "hello_world" > underscore.txt)...executed
+iexec: [echo "hello_world" > underscore.txt]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)
 }\else \message ...
-l. ......,stdout=underscore.txt]{echo "hello_world~"}
+l. ......e,stdout=underscore.txt]{echo "hello_world"}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -168,6 +167,21 @@ and I'll forget about whatever was undefined.
 iexec: Due to 'quiet' option we didn't read the content of 'env2.txt' ({} bytes)
 runsystem(rm env2.txt)...executed
 iexec: The file 'env2.txt' was deleted
+runsystem(echo '%\{}' > iexec.tmp)...executed
+iexec: [echo '%\{}' > iexec.tmp]
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)
+}\else \message ...
+l. ...\iexec[quiet]{echo '\%\\\{\}'}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes)
+runsystem(rm iexec.tmp)...executed
+iexec: The file 'iexec.tmp' was deleted
 runsystem(echo 5 > a.txt)...executed
 iexec: [echo 5 > a.txt]
 ! Undefined control sequence.
