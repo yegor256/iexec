@@ -181,6 +181,25 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 % \end{macro}
 
+% \begin{macro}{append}
+% The stdout produced will be appended to the file specified:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage[trace]{iexec}
+\begin{document}
+\iexec[append,stdout=foo.txt,quiet]{echo 'Hello, '}
+\iexec[append,stdout=foo.txt,quiet]{echo 'Jeffrey!'}
+\input{foo.txt}
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+% \end{macro}
+
 % \StopEventually{}
 
 % \section{Implementation}
@@ -208,7 +227,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   stdout/.estore in = \iexec@stdout,
   stdout/.default = iexec.tmp,
   trace/.estore in = \iexec@traceit,
-  show/.estore in = \iexec@show,
+  append/.estore in = \iexec@append,
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
@@ -242,7 +261,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, we execute it:
 %    \begin{macrocode}
-      \ShellEscape{#2 > \iexec@stdout}%
+      \ShellEscape{#2 \ifdefined\iexec@append>\fi> \iexec@stdout}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}

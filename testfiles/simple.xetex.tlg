@@ -197,3 +197,31 @@ and I'll forget about whatever was undefined.
 iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes)
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 \foo=\read...
+runsystem(echo 'hi, ' >> app.txt)...executed.
+iexec: [echo 'hi, ' > app.txt]
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)^^J}\else \messag...
+l. ......[append,stdout=app.txt,quiet]{echo 'hi, '}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: Due to 'quiet' option we didn't read the content of 'app.txt' ({} bytes)
+runsystem(rm app.txt)...executed.
+iexec: The file 'app.txt' was deleted
+runsystem(echo 'Jeff!' >> app.txt)...executed.
+iexec: [echo 'Jeff!' > app.txt]
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)^^J}\else \messag...
+l. ......append,stdout=app.txt,quiet]{echo 'Jeff!'}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: Due to 'quiet' option we didn't read the content of 'app.txt' ({} bytes)
+runsystem(rm app.txt)...executed.
+iexec: The file 'app.txt' was deleted

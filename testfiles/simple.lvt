@@ -30,4 +30,7 @@ Hello, [\iexec{whoami}]!
 
 Hello, [\y]!
 
+\iexec[append,stdout=app.txt,quiet]{echo 'hi, '}
+\iexec[append,stdout=app.txt,quiet]{echo 'Jeff!'}
+
 \END

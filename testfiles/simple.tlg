@@ -79,3 +79,13 @@ iexec: [echo 6 > iexec.tmp]
 iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' (1386 bytes)
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 \foo=\read...
+runsystem(echo 'hi, ' >> app.txt)...executed.
+iexec: [echo 'hi, ' > app.txt]
+iexec: Due to 'quiet' option we didn't read the content of 'app.txt' (1386 bytes)
+runsystem(rm app.txt)...executed.
+iexec: The file 'app.txt' was deleted
+runsystem(echo 'Jeff!' >> app.txt)...executed.
+iexec: [echo 'Jeff!' > app.txt]
+iexec: Due to 'quiet' option we didn't read the content of 'app.txt' (1386 bytes)
+runsystem(rm app.txt)...executed.
+iexec: The file 'app.txt' was deleted
