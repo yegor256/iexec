@@ -208,6 +208,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   stdout/.estore in = \iexec@stdout,
   stdout/.default = iexec.tmp,
   trace/.estore in = \iexec@traceit,
+  show/.estore in = \iexec@show,
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
@@ -252,10 +253,10 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
     \ifdefined\iexec@quiet
       \message{^^Jiexec: Due to 'quiet' option we didn't read
-      the content of '\iexec@stdout'^^J}%
+      the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
     \else%
       \message{^^Jiexec: We include the content of
-        '\iexec@stdout'...^^J}%
+        '\iexec@stdout' (\pdffilesize{} bytes)...^^J}%
       \input{\iexec@stdout}%
       \message{^^Jiexec: The content of '\iexec@stdout'
       was included into the document^^J}%

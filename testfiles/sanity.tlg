@@ -2,32 +2,32 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 runsystem(echo 65536 > iexec.tmp)...executed.
 iexec: [echo 65536 > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+iexec: We include the content of 'iexec.tmp' (1386 bytes)...
 (iexec.tmp) 
 iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem(echo 42 > sanity.txt)...executed.
 iexec: [echo 42 > sanity.txt]
-iexec: We include the content of 'sanity.txt'...
+iexec: We include the content of 'sanity.txt' (1386 bytes)...
 (sanity.txt) 
 iexec: The content of 'sanity.txt' was included into the document
 runsystem(rm sanity.txt)...executed.
 iexec: The file 'sanity.txt' was deleted
 runsystem(echo "it's me" | cat > iexec.tmp)...executed.
 iexec: [echo "it's me" | cat > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+iexec: We include the content of 'iexec.tmp' (1386 bytes)...
 (iexec.tmp) 
 iexec: The content of 'iexec.tmp' was included into the document
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 runsystem(echo "hello_world" > iexec.tmp)...executed.
 iexec: [echo "hello_world" > iexec.tmp]
-iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp'
+iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' (1386 bytes)
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem(../echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp)...executed.
 iexec: [/bin/echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+iexec: We include the content of 'iexec.tmp' (1386 bytes)...
 (iexec.tmp
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line ....

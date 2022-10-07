@@ -2,33 +2,83 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 runsystem(echo 65536 > iexec.tmp)...executed
 iexec: [echo 65536 > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)...
+}\input {\iex...
+l. ...\iexec{echo 65536}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: We include the content of 'iexec.tmp' ({} bytes)...
 (iexec.tmp) 
 iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
 runsystem(echo 42 > sanity.txt)...executed
 iexec: [echo 42 > sanity.txt]
-iexec: We include the content of 'sanity.txt'...
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)...
+}\input {\iex...
+l. ...\iexec[stdout=sanity.txt]{echo 42}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: We include the content of 'sanity.txt' ({} bytes)...
 (sanity.txt) 
 iexec: The content of 'sanity.txt' was included into the document
 runsystem(rm sanity.txt)...executed
 iexec: The file 'sanity.txt' was deleted
 runsystem(echo "it's me" | cat > iexec.tmp)...executed
 iexec: [echo "it's me" | cat > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)...
+}\input {\iex...
+l. ...\iexec[trace]{echo "it's me" | cat}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: We include the content of 'iexec.tmp' ({} bytes)...
 (iexec.tmp) 
 iexec: The content of 'iexec.tmp' was included into the document
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 runsystem(echo "hello_world" > iexec.tmp)...executed
 iexec: [echo "hello_world" > iexec.tmp]
-iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp'
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)
+}\else \message ...
+l. ...\iexec[quiet]{echo "hello_world"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes)
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
 runsystem(../echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp)...ex
 ecuted
 iexec: [/bin/echo '\begin{equation}\pi = 3.14\end{equation}' > iexec.tmp]
-iexec: We include the content of 'iexec.tmp'...
+! Undefined control sequence.
+\\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
+                                                  {} bytes)...
+}\input {\iex...
+l. ......\begin{equation}\\pi = 3.14\\end{equation}'}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+iexec: We include the content of 'iexec.tmp' ({} bytes)...
 (iexec.tmp
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line ....
