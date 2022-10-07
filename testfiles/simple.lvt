@@ -1,0 +1,31 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+\START
+\showoutput
+
+Hello, [\iexec{whoami}]!
+
+\iexec{echo 65536}
+\iexec[stdout=sanity.txt]{echo 42}
+\iexec[trace]{echo "it's me" | cat}
+\iexec[quiet]{echo "hello_world"}
+\iexec{/bin/echo '\\begin{equation}\\pi = 3.14\\end{equation}'}
+
+\iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world~"}
+\iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
+
+\iexec[quiet,stdout=env1.txt]{echo $HOME}
+\iexec[quiet,stdout=env2.txt]{echo ${HOME}}
+
+\iexec[trace,quiet,stdout=a.txt]{echo 5}
+\iexec[trace,quiet]{echo 6}
+\newread\foo
+\openin\foo=a.txt
+\read\foo to \y
+\setlength\parskip{1pt * \y}
+
+Hello, [\y]!
+
+\END
