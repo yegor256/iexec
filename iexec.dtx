@@ -253,10 +253,11 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 }\makeatother
 %    \end{macrocode}
 
-% Then, we define an internal command for printing the content of a file:
+% \begin{macro}{\iexec@typeout}
+% Then, we define an internal command |\iexec@typeout| for printing the content of a file:
 %    \begin{macrocode}
 \makeatletter\ExplSyntaxOn
-\NewDocumentCommand{\iexec@typeoutfile}{m}{
+\NewDocumentCommand{\iexec@typeout}{m}{
   \iexec_typeout_file:n { #1 }}
 \ior_new:N \g_iexec_typeout_ior
 \cs_new_protected:Nn \iexec_typeout_file:n
@@ -268,6 +269,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 }
 \ExplSyntaxOff\makeatother
 %    \end{macrocode}
+% \end{macro}
 
 % \begin{macro}{\iexec}
 % Then, we define |\iexec| command.
@@ -308,7 +310,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
     \ifdefined\iexec@log
       \message{^^Jiexec: this is the content of \iexec@stdout:^^J}%
-      \iexec@typeoutfile{\iexec@stdout}
+      \iexec@typeout{\iexec@stdout}
       \message{^^J<EOF>^^J}%
     \fi%
 %    \end{macrocode}
