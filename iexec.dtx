@@ -102,7 +102,7 @@ Today is
 %
 % \columnbreak
 %
-% Today is \iexec{date +\%e-\%b-\%Y}
+% Today is \iexec[log]{date +\%e-\%b-\%Y}
 % \end{multicols}
 
 % \begin{macro}{\iexec}
@@ -200,6 +200,24 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 % \end{macro}
 
+% \begin{macro}{log}
+% The stdout produced will be printed in the log:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+\iexec[log]{echo 'Hello, \\LaTeX!'}
+\input{foo.txt}
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+% \end{macro}
+
 % \StopEventually{}
 
 % \section{Implementation}
@@ -213,6 +231,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
 \RequirePackage{shellesc}
 \RequirePackage{pgfkeys}
+\RequirePackage{expl3}
 %    \end{macrocode}
 
 % Then, we parse package options:
@@ -228,9 +247,26 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   stdout/.default = iexec.tmp,
   trace/.estore in = \iexec@traceit,
   append/.estore in = \iexec@append,
+  log/.estore in = \iexec@log,
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
+%    \end{macrocode}
+
+% Then, we define an internal command for printing the content of a file:
+%    \begin{macrocode}
+\ExplSyntaxOn
+\NewDocumentCommand{\iexectypeoutfile}{m}{
+  \iexec_typeout_file:n { #1 }}
+\ior_new:N \g_iexec_typeout_ior
+\cs_new_protected:Nn \iexec_typeout_file:n
+{
+  \ior_open:Nn \g_iexec_typeout_ior { #1 }
+  \ior_str_map_inline:Nn \g_iexec_typeout_ior
+    {\iow_term:n { ##1 }}
+  \ior_close:N \g_iexec_typeout_ior
+}
+\ExplSyntaxOff
 %    \end{macrocode}
 
 % \begin{macro}{\iexec}
@@ -267,6 +303,14 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
       \message{^^Jiexec: [#2 > \iexec@stdout]^^J}%
     \endgroup%
+%    \end{macrocode}
+% Then, if required, the content of the stdout file will be printed to the log:
+%    \begin{macrocode}
+    \ifdefined\iexec@log
+      \message{^^Jiexec: this is the content of \iexec@stdout:^^J}%
+      \iexectypeoutfile{\iexec@stdout}
+      \message{^^JEOF^^J}%
+    \fi%
 %    \end{macrocode}
 % Then, include the produced output into the current document:
 %    \begin{macrocode}

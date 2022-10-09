@@ -89,3 +89,13 @@ iexec: [echo 'Jeff!' > app.txt]
 iexec: Due to 'quiet' option we didn't read the content of 'app.txt' (1386 bytes)
 runsystem(rm app.txt)...executed.
 iexec: The file 'app.txt' was deleted
+runsystem(echo 'Hello, \LaTeX!' > iexec.tmp)...executed.
+iexec: [echo 'Hello, \LaTeX!' > iexec.tmp]
+iexec: this is the content of iexec.tmp:
+Hello, \LaTeX!
+EOF
+iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+(iexec.tmp) 
+iexec: The content of 'iexec.tmp' was included into the document
+runsystem(rm iexec.tmp)...executed.
+iexec: The file 'iexec.tmp' was deleted

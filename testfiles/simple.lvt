@@ -33,4 +33,6 @@ Hello, [\y]!
 \iexec[append,stdout=app.txt,quiet]{echo 'hi, '}
 \iexec[append,stdout=app.txt,quiet]{echo 'Jeff!'}
 
+\iexec[log]{echo 'Hello, \\LaTeX!'}
+
 \END
