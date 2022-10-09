@@ -254,7 +254,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 
 % \begin{macro}{\iexec@typeout}
-% Then, we define an internal command |\iexec@typeout| for printing the content of a file:
+% Then, we define an internal command |\iexec@typeout| for printing the content of a file,
+% as suggested \href{https://tex.stackexchange.com/questions/660808}{here}:
 %    \begin{macrocode}
 \makeatletter\ExplSyntaxOn
 \NewDocumentCommand{\iexec@typeout}{m}{
