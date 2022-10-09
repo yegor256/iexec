@@ -1,3 +1,4 @@
 hard shellesc
 hard pgfkeys
 hard xkeyval
+hard expl3
