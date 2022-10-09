@@ -245,7 +245,7 @@ runsystem(echo 'Hello, \LaTeX!' > iexec.tmp)...executed
 iexec: [echo 'Hello, \LaTeX!' > iexec.tmp]
 iexec: this is the content of iexec.tmp:
 Hello, \LaTeX!
-EOF
+<EOF>
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...

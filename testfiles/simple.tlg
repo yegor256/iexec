@@ -93,7 +93,7 @@ runsystem(echo 'Hello, \LaTeX!' > iexec.tmp)...executed.
 iexec: [echo 'Hello, \LaTeX!' > iexec.tmp]
 iexec: this is the content of iexec.tmp:
 Hello, \LaTeX!
-EOF
+<EOF>
 iexec: We include the content of 'iexec.tmp' (1386 bytes)...
 (iexec.tmp) 
 iexec: The content of 'iexec.tmp' was included into the document
