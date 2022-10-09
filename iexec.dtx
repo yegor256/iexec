@@ -328,14 +328,16 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
 %    \begin{macrocode}
+    \ifdefined\iexec@null\else
     \ifdefined\iexec@log
       \message{^^Jiexec: this is the content of \iexec@stdout:^^J}%
       \iexec@typeout{\iexec@stdout}
       \message{^^J<EOF>^^J}%
-    \fi%
+    \fi\fi%
 %    \end{macrocode}
 % Then, include the produced output into the current document:
 %    \begin{macrocode}
+    \ifdefined\iexec@null\else
     \ifdefined\iexec@quiet
       \message{^^Jiexec: Due to 'quiet' option we didn't read
       the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
@@ -345,10 +347,11 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \input{\iexec@stdout}%
       \message{^^Jiexec: The content of '\iexec@stdout'
       was included into the document^^J}%
-    \fi%
+    \fi\fi%
 %    \end{macrocode}
 % Finally, delete the file or leave it untouched:
 %    \begin{macrocode}
+    \ifdefined\iexec@null\else
     \ifiexec@trace%
       \message{^^Jiexec: Due to package option 'trace',
       the file '\iexec@stdout' was not deleted^^J}%
@@ -360,7 +363,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
         \ShellEscape{rm \iexec@stdout}%
         \message{^^Jiexec: The file '\iexec@stdout' was deleted^^J}%
       \fi%
-    \fi%
+    \fi\fi%
   \endgroup
 }\makeatother
 %    \end{macrocode}
