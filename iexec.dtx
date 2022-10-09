@@ -210,7 +210,23 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 \usepackage{iexec}
 \begin{document}
 \iexec[log]{echo 'Hello, \\LaTeX!'}
-\input{foo.txt}
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+% \end{macro}
+
+% \begin{macro}{null}
+% The stdout of the command will be sent to |/dev/null|:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+\iexec[null]{rm some-file.txt}
 \end{document}
 \end{verbatim}
 %\iffalse
@@ -226,6 +242,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{v0.4.0}{2021/08/01}{Runtime verification for --shell-escape option}
 % \changes{v0.4.1}{2021/08/08}{Options trace, stdout, and quiet added}
 % \changes{v0.5.0}{2022/01/08}{Major bug fixes}
+% \changes{v0.6.0}{2022/10/09}{Additional options 'log' and 'append'}
+% \changes{v0.7.0}{2022/10/10}{Additional option 'null'}
 
 % First, we include a few packages:
 %    \begin{macrocode}
@@ -248,6 +266,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   trace/.estore in = \iexec@traceit,
   append/.estore in = \iexec@append,
   log/.estore in = \iexec@log,
+  null/.estore in = \iexec@null,
   quiet/.estore in = \iexec@quiet,
   stdout
 }\makeatother
@@ -300,11 +319,11 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, we execute it:
 %    \begin{macrocode}
-      \ShellEscape{#2 \ifdefined\iexec@append>\fi> \iexec@stdout}%
+      \ShellEscape{#2 \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}
-      \message{^^Jiexec: [#2 > \iexec@stdout]^^J}%
+      \message{^^Jiexec: [#2 \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
     \endgroup%
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
