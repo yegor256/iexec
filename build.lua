@@ -3,7 +3,7 @@ ctanupload = true
 typesetopts = "--interaction=batchmode --shell-escape"
 checkopts = "--interaction=batchmode --shell-escape"
 tagfiles = {"build.lua", "iexec.dtx"}
-cleanfiles = {"*.glo", "*.fls", "*.idx", "*.out", "*.fdb_latexmk", "*.aux", "*.sty", "*.zip", "iexec.pdf"}
+cleanfiles = {"*.glo", "*.fls", "*.idx", "*.out", "*.dvi", "*.fdb_latexmk", "*.aux", "*.sty", "*.zip", "iexec.pdf"}
 typesetruns = 2
 
 uploadconfig = {
