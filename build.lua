@@ -8,7 +8,7 @@ typesetruns = 2
 
 uploadconfig = {
   pkg = "iexec",
-  version = "1.1.1",
+  version = "0.0.0",
   author = "Yegor Bugayenko",
   uploader = "Yegor Bugayenko",
   email = "yegor256@gmail.com",
@@ -29,6 +29,6 @@ uploadconfig = {
 function update_tag(file, content, tagname, tagdate)
   return string.gsub(
     string.gsub(content, "0%.0%.0", tagname),
-    "0000%/00%/00", os.date("%Y/%m/%d")
+    "0000/00/00", os.date("%Y/%m/%d")
   )
 end
