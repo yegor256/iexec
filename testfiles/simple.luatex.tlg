@@ -14,8 +14,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'iexec.tmp' ({} bytes)...
-(iexec.tmp) 
-iexec: The content of 'iexec.tmp' was included into the document
+(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo 65536) >iexec.tmp)...executed
@@ -31,8 +30,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'iexec.tmp' ({} bytes)...
-(iexec.tmp) 
-iexec: The content of 'iexec.tmp' was included into the document
+(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo 42) >sanity.txt)...executed
@@ -48,8 +46,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'sanity.txt' ({} bytes)...
-(sanity.txt) 
-iexec: The content of 'sanity.txt' was included into the document
+(sanity.txt) iexec: The content of 'sanity.txt' was included into the document
 runsystem(rm sanity.txt)...executed
 iexec: The file 'sanity.txt' was deleted
 runsystem((echo "it's me" | cat) >iexec.tmp)...executed
@@ -65,8 +62,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'iexec.tmp' ({} bytes)...
-(iexec.tmp) 
-iexec: The content of 'iexec.tmp' was included into the document
+(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 runsystem((echo "hello_world") >iexec.tmp)...executed
 iexec: [(echo "hello_world") >iexec.tmp]
@@ -102,8 +98,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line ....
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line ....
-) 
-iexec: The content of 'iexec.tmp' was included into the document
+) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo "hello_world") >underscore.txt)...executed
@@ -133,8 +128,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'foo.txt' ({} bytes)...
-(foo.txt) 
-iexec: The content of 'foo.txt' was included into the document
+(foo.txt) iexec: The content of 'foo.txt' was included into the document
 runsystem(rm foo.txt)...executed
 iexec: The file 'foo.txt' was deleted
 runsystem((echo $HOME) >env1.txt)...executed
@@ -259,7 +253,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 iexec: We include the content of 'iexec.tmp' ({} bytes)...
-(iexec.tmp) 
-iexec: The content of 'iexec.tmp' was included into the document
+(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted

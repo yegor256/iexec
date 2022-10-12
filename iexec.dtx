@@ -308,6 +308,10 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
     \fi\fi%
     \begingroup%
 %    \end{macrocode}
+% Then, start the log from a clean line:
+%    \begin{macrocode}
+      \message{^^J}%
+%    \end{macrocode}
 % Then, we define a few special chars in order to escape them in the shell
 % (the full
 % list of them is in \href{https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf}{macros2e}):
@@ -323,29 +327,29 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}
-      \message{^^Jiexec: [(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
+      \message{iexec: [(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
     \endgroup%
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else
     \ifdefined\iexec@log
-      \message{^^Jiexec: this is the content of \iexec@stdout:^^J}%
+      \message{iexec: this is the content of \iexec@stdout:^^J}%
       \iexec@typeout{\iexec@stdout}
-      \message{^^J<EOF>^^J}%
+      \message{<EOF>^^J}%
     \fi\fi%
 %    \end{macrocode}
 % Then, include the produced output into the current document:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else
     \ifdefined\iexec@quiet
-      \message{^^Jiexec: Due to 'quiet' option we didn't read
+      \message{iexec: Due to 'quiet' option we didn't read
       the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
     \else%
-      \message{^^Jiexec: We include the content of
+      \message{iexec: We include the content of
         '\iexec@stdout' (\pdffilesize{} bytes)...^^J}%
       \input{\iexec@stdout}%
-      \message{^^Jiexec: The content of '\iexec@stdout'
+      \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
     \fi\fi%
 %    \end{macrocode}
@@ -353,15 +357,15 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
     \ifdefined\iexec@null\else
     \ifiexec@trace%
-      \message{^^Jiexec: Due to package option 'trace',
+      \message{iexec: Due to package option 'trace',
       the file '\iexec@stdout' was not deleted^^J}%
     \else%
       \ifdefined\iexec@traceit%
-        \message{^^Jiexec: Due to 'trace' option,
+        \message{iexec: Due to 'trace' option,
         the file '\iexec@stdout' was not deleted^^J}%
       \else%
         \ShellEscape{rm \iexec@stdout}%
-        \message{^^Jiexec: The file '\iexec@stdout' was deleted^^J}%
+        \message{iexec: The file '\iexec@stdout' was deleted^^J}%
       \fi%
     \fi\fi%
   \endgroup
