@@ -105,12 +105,11 @@ Today is
 % Today is \iexec[log]{date +\%e-\%b-\%Y}
 % \end{multicols}
 
-% \begin{macro}{\iexec}
+% \DescribeMacro{\iexec}
 % The only command provided by this package is |\iexec| \oarg{options} \marg{cmd}.
 % Its only mandatory argument \meta{cmd} is the command to be executed
 % through the terminal shell (bash, or whatever is set as the default one
 % on your user console).
-% \end{macro}
 
 % You have to run |pdflatex| (or just |latex|)
 % with the |--shell-escape| flag
@@ -119,7 +118,7 @@ Today is
 
 % \section{Options}
 
-% \begin{macro}{quiet}
+% \DescribeMacro{quiet}
 % If you don't want the output to be visible,
 % use |\phantom\{\iexec{...}}|.
 % Otherwise, you can use |quiet| option:
@@ -137,11 +136,10 @@ I just want to delete some file:
 %\iffalse
 %</verb>
 %\fi
-% \end{macro}
 % In this case, whatever the shell command produces will not be included
 % into the document.
 
-% \begin{macro}{stdout}
+% \DescribeMacro{stdout}
 % The output of your code is saved into the file provided as the
 % second optional argument of |\iexec| (the default value is |iexec.tmp|):
 %\iffalse
@@ -158,9 +156,8 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %</verb>
 %\fi
 % The tailing part of the command here removes all ends-of-line.
-% \end{macro}
 
-% \begin{macro}{trace}
+% \DescribeMacro{trace}
 % The file specified will be deleted right after its usage. If you don't
 % want this to happen, use |trace| package option: all files will remain
 % in the directory where they were created.
@@ -179,9 +176,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\iffalse
 %</verb>
 %\fi
-% \end{macro}
 
-% \begin{macro}{append}
+% \DescribeMacro{append}
 % The stdout produced will be appended to the file specified:
 %\iffalse
 %<*verb>
@@ -198,9 +194,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\iffalse
 %</verb>
 %\fi
-% \end{macro}
 
-% \begin{macro}{log}
+% \DescribeMacro{log}
 % The stdout produced will be printed in \TeX{} log:
 %\iffalse
 %<*verb>
@@ -215,9 +210,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\iffalse
 %</verb>
 %\fi
-% \end{macro}
 
-% \begin{macro}{null}
+% \DescribeMacro{null}
 % The stdout of the command will be sent to |/dev/null|:
 %\iffalse
 %<*verb>
@@ -232,7 +226,6 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\iffalse
 %</verb>
 %\fi
-% \end{macro}
 
 % \StopEventually{}
 
