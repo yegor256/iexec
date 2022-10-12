@@ -319,11 +319,11 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, we execute it:
 %    \begin{macrocode}
-      \ShellEscape{#2 \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi}%
+      \ShellEscape{(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}
-      \message{^^Jiexec: [#2 \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
+      \message{^^Jiexec: [(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
     \endgroup%
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
