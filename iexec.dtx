@@ -140,8 +140,8 @@ I just want to delete some file:
 % into the document.
 
 % \DescribeMacro{stdout}
-% The output of your code is saved into the file provided as the
-% second optional argument of |\iexec| (the default value is |iexec.tmp|):
+% The output of your code is saved into the file provided as an
+% optional argument of |\iexec| (the default value is |iexec.tmp|):
 %\iffalse
 %<*verb>
 %\fi
@@ -156,6 +156,24 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %</verb>
 %\fi
 % The tailing part of the command here removes all ends-of-line.
+
+% \DescribeMacro{stderr}
+% The error output of the code is saved into the file provided as an
+% optional argument of |\iexec| (by default the error output
+% is streamed into |stdout|):
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage{iexec}
+\begin{document}
+Today is \iexec[stderr=my.txt]{broken-command}.
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
 
 % \DescribeMacro{trace}
 % The file specified will be deleted right after its usage. If you don't
@@ -256,6 +274,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   /iexec,
   stdout/.estore in = \iexec@stdout,
   stdout/.default = iexec.tmp,
+  stderr/.estore in = \iexec@stderr,
   trace/.estore in = \iexec@traceit,
   append/.estore in = \iexec@append,
   log/.estore in = \iexec@log,
@@ -316,11 +335,15 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, we execute it:
 %    \begin{macrocode}
-      \ShellEscape{(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi}%
+      \def\iexec@cmd{(#2)
+        \ifdefined\iexec@append>\fi>
+        \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
+        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi}
+      \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}
-      \message{iexec: [(#2) \ifdefined\iexec@append>\fi>\ifdefined\iexec@null/dev/null\else\iexec@stdout\fi]^^J}%
+      \message{iexec: [\iexec@cmd]^^J}%
     \endgroup%
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
