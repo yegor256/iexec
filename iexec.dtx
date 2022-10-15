@@ -315,10 +315,10 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % First, we verify that |latex| is running with |--shell-escape| option, since without
 % it nothing will work; so, it's better to throw an error earlier than later:
 %    \begin{macrocode}
-    \ifdefined\pdfshellescape\ifnum\pdfshellescape=1\else%
+    \ifnum\ShellEscapeStatus=1\else%
       \PackageError{iexec}{You must run TeX processor with
       --shell-escape option}{}%
-    \fi\fi%
+    \fi%
     \begingroup%
 %    \end{macrocode}
 % Then, start the log from a clean line:
