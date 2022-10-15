@@ -272,14 +272,14 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 \makeatletter\pgfkeys{
   /iexec/.is family,
   /iexec,
-  stdout/.estore in = \iexec@stdout,
+  stdout/.store in = \iexec@stdout,
   stdout/.default = iexec.tmp,
-  stderr/.estore in = \iexec@stderr,
-  trace/.estore in = \iexec@traceit,
-  append/.estore in = \iexec@append,
-  log/.estore in = \iexec@log,
-  null/.estore in = \iexec@null,
-  quiet/.estore in = \iexec@quiet,
+  stderr/.store in = \iexec@stderr,
+  trace/.store in = \iexec@traceit,
+  append/.store in = \iexec@append,
+  log/.store in = \iexec@log,
+  null/.store in = \iexec@null,
+  quiet/.store in = \iexec@quiet,
   stdout
 }\makeatother
 %    \end{macrocode}
