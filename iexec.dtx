@@ -258,19 +258,25 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{v0.8.0}{2022/10/11}{Bug fixes}
 % \changes{v0.9.0}{2022/10/12}{Additional option 'stderr'}
 
-% First, we include a few packages:
+% First, we include \href{https://ctan.org/pkg/shellesc}{shellesc} package, which
+% we use to execute shell commands:
 %    \begin{macrocode}
 \RequirePackage{shellesc}
-\RequirePackage{pgfkeys}
-\RequirePackage{expl3}
 %    \end{macrocode}
 
 % Then, we parse package options:
 %    \begin{macrocode}
 \RequirePackage{xkeyval}
-\makeatletter\newif\ifiexec@trace
+\makeatletter
+\newif\ifiexec@trace
 \DeclareOptionX{trace}{\iexec@tracetrue}
-\ProcessOptionsX\relax\makeatother
+\ProcessOptionsX\relax
+\makeatother
+%    \end{macrocode}
+
+% Then, we prepare to parse the options of |\iexec| command:
+%    \begin{macrocode}
+\RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
   /iexec/.is family,
   /iexec,
@@ -290,6 +296,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % Then, we define an internal command |\iexec@typeout| for printing the content of a file,
 % as suggested \href{https://tex.stackexchange.com/questions/660808}{here}:
 %    \begin{macrocode}
+\RequirePackage{expl3}
 \makeatletter\ExplSyntaxOn
 \NewDocumentCommand{\iexec@typeout}{m}{
   \iexec_typeout_file:n { #1 }}
