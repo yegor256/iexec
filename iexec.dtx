@@ -56,6 +56,7 @@
 \documentclass{ltxdoc}
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage{microtype}
+\usepackage[dtx]{docshots}
 \usepackage{iexec}
 \usepackage{href-ul}
 \PageIndex
@@ -81,29 +82,16 @@
 % This package helps you execute shell commands right from the
 % document and then put their output to the document:
 %
-% \begin{multicols}{2}
-% \setlength{\parskip}{0pt}
-% \small
-% \raggedcolumns
-%\iffalse
-%<*verb>
-%\fi
-\begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
-Today is
-  \iexec{date +\%e-\%b-\%Y}
-\end{document}
-\end{verbatim}
-%\iffalse
-%</verb>
-%\fi
-%
-% \columnbreak
-%
-% Today is \iexec[log]{date +\%e-\%b-\%Y}
-% \end{multicols}
+% \begin{docshot}
+% \documentclass{article}
+% \usepackage{iexec}
+% \usepackage[paperwidth=3in]{geometry}
+% \pagestyle{empty}
+% \begin{document}
+% Today is \textbf{%
+%   \iexec{date +\%e-\%b-\%Y}}
+% \end{document}
+% \end{docshot}
 
 % \DescribeMacro{\iexec} The only command provided by this package is |\iexec| \oarg{options} \marg{cmd}.
 % Its only mandatory argument \meta{cmd} is the command to be executed
@@ -125,12 +113,8 @@ Today is
 %<*verb>
 %\fi
 \begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
 I just want to delete some file:
 \iexec[quiet]{rm -f foo.txt}
-\end{document}
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -145,11 +129,7 @@ I just want to delete some file:
 %<*verb>
 %\fi
 \begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
 Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
-\end{document}
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -164,11 +144,7 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %<*verb>
 %\fi
 \begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
 Today is \iexec[stderr=my.txt]{broken-command}.
-\end{document}
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -218,11 +194,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %<*verb>
 %\fi
 \begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
 \iexec[log]{echo 'Hello, \\LaTeX!'}
-\end{document}
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -234,11 +206,20 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %<*verb>
 %\fi
 \begin{verbatim}
-\documentclass{article}
-\usepackage{iexec}
-\begin{document}
 \iexec[null]{rm some-file.txt}
-\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+
+% \DescribeMacro{ignore}
+% By default, we report an error if exit code is not equal to zero. You can suppress
+% this with |ignore| option:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\iexec[ignore]{broken-command}
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -256,6 +237,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{v0.7.0}{2022/10/10}{Additional option 'null'}
 % \changes{v0.8.0}{2022/10/11}{Bug fixes}
 % \changes{v0.9.0}{2022/10/12}{Additional option 'stderr'}
+% \changes{v0.10.0}{2022/10/22}{Additional option 'ignore'}
 
 % First, we include \href{https://ctan.org/pkg/shellesc}{shellesc} package, which
 % we use to execute shell commands:
@@ -287,6 +269,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   log/.store in = \iexec@log,
   null/.store in = \iexec@null,
   quiet/.store in = \iexec@quiet,
+  ignore/.store in = \iexec@ignore,
   stdout
 }\makeatother
 %    \end{macrocode}

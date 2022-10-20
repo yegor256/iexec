@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - run: sudo apt-get -y install ghostscript
       - uses: teatimeguest/setup-texlive-action@v2.4.1
         with:
           package-file: DEPENDS.txt
-          packages: scheme-basic xetex ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build
+          packages: scheme-basic xetex ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build docshots
       - run: l3build check -q --show-log-on-error
