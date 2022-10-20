@@ -13,7 +13,7 @@ Hello, [\iexec{whoami}]!
 \iexec[quiet]{echo "hello_world"}
 \iexec{/bin/echo '\\begin{equation}\\pi = 3.14\\end{equation}'}
 
-\iexec[quiet,trace,stdout=underscore.txt]{echo "hello_world"}
+\iexec[log,quiet,trace,stdout=underscore.txt]{echo "hello_world"}
 \iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
 
 \iexec[ignore]{./broken-command-doesnt-exist.sh}
@@ -23,7 +23,7 @@ Hello, [\iexec{whoami}]!
 
 \iexec[quiet]{echo '\%\\\{\}'}
 
-\iexec[trace,quiet,stdout=a.txt]{echo 5}
+\iexec[log,trace,quiet,stdout=a.txt]{echo 5}
 \iexec[trace,quiet]{echo 6}
 \newread\foo
 \openin\foo=a.txt

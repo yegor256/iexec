@@ -298,7 +298,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % Then, we define |\iexec| command.
 % It is implemented with the help of |\ShellEscape| from |shellesc| package:
 %    \begin{macrocode}
-\makeatletter\newcommand\iexec[2][]{%
+\makeatletter
+\newread\iexec@retfile
+\newcommand\iexec[2][]{%
   \begingroup%
     \pgfqkeys{/iexec}{#1}%
 %    \end{macrocode}
@@ -346,7 +348,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@log%
-      \message{iexec: this is the content of \iexec@stdout:^^J}%
+      \message{iexec: This is the content of \iexec@stdout:^^J}%
       \iexec@typeout{\iexec@stdout}%
       \message{<EOF>^^J}%
     \fi\fi%
@@ -354,7 +356,6 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % Then, we check exit code:
 %    \begin{macrocode}
     \ifdefined\iexec@log\else%
-      \newread\iexec@retfile%
       \immediate\openin\iexec@retfile=iexec.ret%
       \read\iexec@retfile to \iexec@ret%
       \immediate\closein\iexec@retfile%
@@ -369,12 +370,13 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
     \ifdefined\iexec@quiet%
       \ifdefined\iexec@log%
         \message{iexec: Due to 'quiet' option we didn't read
-        the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
+        the content of '\iexec@stdout'
+        (\pdffilesize{\iexec@stdout} bytes)^^J}%
       \fi%
     \else%
       \ifdefined\iexec@log%
-        \message{iexec: We include the content of
-          '\iexec@stdout' (\pdffilesize{} bytes)...^^J}%
+        \message{iexec: We include the content of '\iexec@stdout'
+        (\pdffilesize{\iexec@stdout} bytes)...^^J}%
       \fi%
       \input{\iexec@stdout}%
       \message{iexec: The content of '\iexec@stdout'
