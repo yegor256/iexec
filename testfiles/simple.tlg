@@ -59,7 +59,7 @@ iexec: [(echo 'Hello, \LaTeX!') > iexec.tmp 2>&1; echo $? >iexec.ret]
 iexec: This is the content of iexec.tmp:
 Hello, \LaTeX!
 <EOF>
-iexec: We include the content of 'iexec.tmp' (15 bytes)...
+iexec: We include the content of 'iexec.tmp'(15 bytes)...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
