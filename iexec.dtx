@@ -331,7 +331,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \def\iexec@cmd{(#2)
         \ifdefined\iexec@append>\fi>
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
-        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi}
+        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi
+        \ifdefined\iexec@ignore\else; echo $? >iexec.ret\fi}
       \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
@@ -350,15 +351,31 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \message{<EOF>^^J}%
     \fi\fi%
 %    \end{macrocode}
+% Then, we check exit code:
+%    \begin{macrocode}
+    \ifdefined\iexec@log\else%
+      \newread\iexec@retfile%
+      \immediate\openin\iexec@retfile=iexec.ret%
+      \read\iexec@retfile to \iexec@ret%
+      \immediate\closein\iexec@retfile%
+      \ifnum\iexec@ret=0\else%
+        \PackageError{iexec}{Exit code is \iexec@ret}{}%
+      \fi%
+    \fi%
+%    \end{macrocode}
 % Then, include the produced output into the current document:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@quiet%
-      \message{iexec: Due to 'quiet' option we didn't read
-      the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: Due to 'quiet' option we didn't read
+        the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
+      \fi%
     \else%
-      \message{iexec: We include the content of
-        '\iexec@stdout' (\pdffilesize{} bytes)...^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: We include the content of
+          '\iexec@stdout' (\pdffilesize{} bytes)...^^J}%
+      \fi%
       \input{\iexec@stdout}%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
@@ -368,15 +385,21 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifiexec@trace%
-      \message{iexec: Due to package option 'trace',
-      the file '\iexec@stdout' was not deleted^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: Due to package option 'trace',
+        the file '\iexec@stdout' was not deleted^^J}%
+      \fi%
     \else%
       \ifdefined\iexec@traceit%
-        \message{iexec: Due to 'trace' option,
-        the file '\iexec@stdout' was not deleted^^J}%
+        \ifdefined\iexec@log%
+          \message{iexec: Due to 'trace' option,
+          the file '\iexec@stdout' was not deleted^^J}%
+        \fi%
       \else%
         \ShellEscape{rm \iexec@stdout}%
-        \message{iexec: The file '\iexec@stdout' was deleted^^J}%
+        \ifdefined\iexec@log%
+          \message{iexec: The file '\iexec@stdout' was deleted^^J}%
+        \fi%
       \fi%
     \fi\fi%
   \endgroup

@@ -2,6 +2,8 @@
 build/
 _minted-*/
 iexec.tex
+_docshots/
+iexec.ret
 *.zip
 *.toc
 *.pdf

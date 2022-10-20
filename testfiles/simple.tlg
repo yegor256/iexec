@@ -1,30 +1,25 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-runsystem((whoami) > iexec.tmp 2>&1)...executed.
-iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+runsystem((whoami) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
-runsystem((echo 65536) > iexec.tmp 2>&1)...executed.
-iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+runsystem((echo 65536) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
-runsystem((echo 42) > sanity.txt 2>&1)...executed.
-iexec: We include the content of 'sanity.txt' (1386 bytes)...
+runsystem((echo 42) > sanity.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (sanity.txt) iexec: The content of 'sanity.txt' was included into the document
 runsystem(rm sanity.txt)...executed.
-iexec: The file 'sanity.txt' was deleted
-runsystem((echo "it's me" | cat) > iexec.tmp 2>&1)...executed.
-iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+runsystem((echo "it's me" | cat) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
-iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
-runsystem((echo "hello_world") > iexec.tmp 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' (1386 bytes)
+runsystem((echo "hello_world") > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
-runsystem((../echo '\begin{equation}\pi = 3.14\end{equation}') > iexec.tmp 2>&1)...executed.
-iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+runsystem((../echo '\begin{equation}\pi = 3.14\end{equation}') > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (iexec.tmp
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line ....
@@ -32,49 +27,44 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line ....
 ) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
-runsystem((echo "hello_world") > underscore.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'underscore.txt' (1386 bytes)
-iexec: Due to 'trace' option, the file 'underscore.txt' was not deleted
-runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1)...executed.
-iexec: We include the content of 'foo.txt' (1386 bytes)...
+runsystem((echo "hello_world") > underscore.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
 (foo.txt) iexec: The content of 'foo.txt' was included into the document
 runsystem(rm foo.txt)...executed.
-iexec: The file 'foo.txt' was deleted
-runsystem((echo $HOME) > env1.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'env1.txt' (1386 bytes)
-runsystem(rm env1.txt)...executed.
-iexec: The file 'env1.txt' was deleted
-runsystem((echo ${HOME}) > env2.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'env2.txt' (1386 bytes)
-runsystem(rm env2.txt)...executed.
-iexec: The file 'env2.txt' was deleted
-runsystem((echo '%\{}') > iexec.tmp 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' (1386 bytes)
-runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
-runsystem((echo 5) > a.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'a.txt' (1386 bytes)
-iexec: Due to 'trace' option, the file 'a.txt' was not deleted
-runsystem((echo 6) > iexec.tmp 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' (1386 bytes)
-iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
-\foo=\read...
-runsystem((echo 'hi, ') >> app.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'app.txt' (1386 bytes)
-runsystem(rm app.txt)...executed.
-iexec: The file 'app.txt' was deleted
-runsystem((echo 'Jeff!') >> app.txt 2>&1)...executed.
-iexec: Due to 'quiet' option we didn't read the content of 'app.txt' (1386 bytes)
-runsystem(rm app.txt)...executed.
-iexec: The file 'app.txt' was deleted
-runsystem((date) > /dev/null 2>&1)...executed.
-runsystem((echo 'Hello, \LaTeX!') > iexec.tmp 2>&1)...executed.
-iexec: [(echo 'Hello, \LaTeX!') > iexec.tmp 2>&1]
-iexec: this is the content of iexec.tmp:
-Hello, \LaTeX!
-<EOF>
-iexec: We include the content of 'iexec.tmp' (1386 bytes)...
+runsystem((broken-command-doesnt-exist.sh) > iexec.tmp 2>&1)...executed.
+\iexec@retfile=\read...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed.
-iexec: The file 'iexec.tmp' was deleted
+runsystem((echo $HOME) > env1.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+runsystem(rm env1.txt)...executed.
+runsystem((echo ${HOME}) > env2.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+runsystem(rm env2.txt)...executed.
+runsystem((echo '%\{}') > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+runsystem(rm iexec.tmp)...executed.
+runsystem((echo 5) > a.txt 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+runsystem((echo 6) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed.
+\iexec@retfile=\read...
+! No room for a new \read.
+\e@ch@ck ...message {No room for a new \string #4}
+                                                  \fi \fi 
+l. ...\newread\foo
+This error message was generated by an \errmessage
+command, so I can't give any explicit help.
+Pretend that you're Hercule Poirot: Examine all clues,
+and deduce the truth by order and method.
+\foo=\read...
+! Bad number (16).
+l. ...\openin\foo
+                =a.txt
+Since I expected to read a number between 0 and 15,
+I changed this one to zero.
+! Emergency stop.
+<read *> 
+l. ...\read\foo to \y
+*** (cannot \read from terminal in nonstop modes)
