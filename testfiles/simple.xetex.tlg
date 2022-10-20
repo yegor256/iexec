@@ -1,7 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 runsystem((whoami) > iexec.tmp 2>&1)...executed.
-iexec: [(whoami) > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -17,7 +16,6 @@ iexec: We include the content of 'iexec.tmp' ({} bytes)...
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo 65536) > iexec.tmp 2>&1)...executed.
-iexec: [(echo 65536) > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -32,7 +30,6 @@ iexec: We include the content of 'iexec.tmp' ({} bytes)...
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo 42) > sanity.txt 2>&1)...executed.
-iexec: [(echo 42) > sanity.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -47,7 +44,6 @@ iexec: We include the content of 'sanity.txt' ({} bytes)...
 runsystem(rm sanity.txt)...executed.
 iexec: The file 'sanity.txt' was deleted
 runsystem((echo "it's me" | cat) > iexec.tmp 2>&1)...executed.
-iexec: [(echo "it's me" | cat) > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -61,7 +57,6 @@ iexec: We include the content of 'iexec.tmp' ({} bytes)...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 runsystem((echo "hello_world") > iexec.tmp 2>&1)...executed.
-iexec: [(echo "hello_world") > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -75,7 +70,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem((../echo '\begin{equation}\pi = 3.14\end{equation}') > iexec.tmp 2>&1)...executed.
-iexec: [(../echo '\begin{equation}\pi = 3.14\end{equation}') > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -95,7 +89,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo "hello_world") > underscore.txt 2>&1)...executed.
-iexec: [(echo "hello_world") > underscore.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -108,7 +101,6 @@ and I'll forget about whatever was undefined.
 iexec: Due to 'quiet' option we didn't read the content of 'underscore.txt' ({} bytes)
 iexec: Due to 'trace' option, the file 'underscore.txt' was not deleted
 runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1)...executed.
-iexec: [(echo $ABSENT_VARIABLE) > foo.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)...^^J}\input {\i...
@@ -123,7 +115,6 @@ iexec: We include the content of 'foo.txt' ({} bytes)...
 runsystem(rm foo.txt)...executed.
 iexec: The file 'foo.txt' was deleted
 runsystem((echo $HOME) > env1.txt 2>&1)...executed.
-iexec: [(echo $HOME) > env1.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -137,7 +128,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'env1.txt' ({} bytes)
 runsystem(rm env1.txt)...executed.
 iexec: The file 'env1.txt' was deleted
 runsystem((echo ${HOME}) > env2.txt 2>&1)...executed.
-iexec: [(echo ${HOME}) > env2.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -151,7 +141,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'env2.txt' ({} bytes)
 runsystem(rm env2.txt)...executed.
 iexec: The file 'env2.txt' was deleted
 runsystem((echo '%\{}') > iexec.tmp 2>&1)...executed.
-iexec: [(echo '%\{}') > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -165,7 +154,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes
 runsystem(rm iexec.tmp)...executed.
 iexec: The file 'iexec.tmp' was deleted
 runsystem((echo 5) > a.txt 2>&1)...executed.
-iexec: [(echo 5) > a.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -178,7 +166,6 @@ and I'll forget about whatever was undefined.
 iexec: Due to 'quiet' option we didn't read the content of 'a.txt' ({} bytes)
 iexec: Due to 'trace' option, the file 'a.txt' was not deleted
 runsystem((echo 6) > iexec.tmp 2>&1)...executed.
-iexec: [(echo 6) > iexec.tmp 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -192,7 +179,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'iexec.tmp' ({} bytes
 iexec: Due to 'trace' option, the file 'iexec.tmp' was not deleted
 \foo=\read...
 runsystem((echo 'hi, ') >> app.txt 2>&1)...executed.
-iexec: [(echo 'hi, ') >> app.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -206,7 +192,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'app.txt' ({} bytes)
 runsystem(rm app.txt)...executed.
 iexec: The file 'app.txt' was deleted
 runsystem((echo 'Jeff!') >> app.txt 2>&1)...executed.
-iexec: [(echo 'Jeff!') >> app.txt 2>&1]
 ! Undefined control sequence.
 \\iexec ...tent of '\iexec@stdout ' (\pdffilesize 
                                                   {} bytes)^^J}\else \messag...
@@ -220,7 +205,6 @@ iexec: Due to 'quiet' option we didn't read the content of 'app.txt' ({} bytes)
 runsystem(rm app.txt)...executed.
 iexec: The file 'app.txt' was deleted
 runsystem((date) > /dev/null 2>&1)...executed.
-iexec: [(date) > /dev/null 2>&1]
 runsystem((echo 'Hello, \LaTeX!') > iexec.tmp 2>&1)...executed.
 iexec: [(echo 'Hello, \LaTeX!') > iexec.tmp 2>&1]
 iexec: this is the content of iexec.tmp:

@@ -117,7 +117,8 @@ Today is
 
 % \section{Options}
 
-% \DescribeMacro{quiet} If you don't want the output to be visible,
+% \DescribeMacro{quiet}
+% If you don't want the output to be visible,
 % use |\phantom\{\iexec{...}}|.
 % Otherwise, you can use |quiet| option:
 %\iffalse
@@ -137,7 +138,8 @@ I just want to delete some file:
 % In this case, whatever the shell command produces will not be included
 % into the document.
 
-% \DescribeMacro{stdout} The output of your code is saved into the file provided as an
+% \DescribeMacro{stdout}
+% The output of your code is saved into the file provided as an
 % optional argument of |\iexec| (the default value is |iexec.tmp|):
 %\iffalse
 %<*verb>
@@ -154,7 +156,8 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %\fi
 % The tailing part of the command here removes all ends-of-line.
 
-% \DescribeMacro{stderr} The error output of the code is saved into the file provided as an
+% \DescribeMacro{stderr}
+% The error output of the code is saved into the file provided as an
 % optional argument of |\iexec| (by default the error output
 % is streamed into |stdout|):
 %\iffalse
@@ -171,7 +174,8 @@ Today is \iexec[stderr=my.txt]{broken-command}.
 %</verb>
 %\fi
 
-% \DescribeMacro{trace} The file specified will be deleted right after its usage. If you don't
+% \DescribeMacro{trace}
+% The file specified will be deleted right after its usage. If you don't
 % want this to happen, use |trace| package option: all files will remain
 % in the directory where they were created.
 % It's possible to turn tracing on globbaly, for the entire document, using
@@ -190,7 +194,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %</verb>
 %\fi
 
-% \DescribeMacro{append} The stdout produced will be appended to the file specified:
+% \DescribeMacro{append}
+% The stdout produced will be appended to the file specified:
 %\iffalse
 %<*verb>
 %\fi
@@ -207,7 +212,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %</verb>
 %\fi
 
-% \DescribeMacro{log} The stdout produced will be printed in \TeX{} log:
+% \DescribeMacro{log}
+% The stdout produced will be printed in \TeX{} log:
 %\iffalse
 %<*verb>
 %\fi
@@ -222,7 +228,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %</verb>
 %\fi
 
-% \DescribeMacro{null} The stdout of the command will be sent to |/dev/null|:
+% \DescribeMacro{null}
+% The stdout of the command will be sent to |/dev/null|:
 %\iffalse
 %<*verb>
 %\fi
@@ -309,7 +316,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % It is implemented with the help of |\ShellEscape| from |shellesc| package:
 %    \begin{macrocode}
 \makeatletter\newcommand\iexec[2][]{%
-  \begingroup
+  \begingroup%
     \pgfqkeys{/iexec}{#1}%
 %    \end{macrocode}
 % First, we verify that |latex| is running with |--shell-escape| option, since without
@@ -323,7 +330,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, start the log from a clean line:
 %    \begin{macrocode}
-      \message{^^J}%
+      \ifdefined\iexec@log%
+        \message{^^J}%
+      \fi%
 %    \end{macrocode}
 % Then, we define a few special chars in order to escape them in the shell
 % (the full
@@ -344,22 +353,24 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
 %    \begin{macrocode}
-      \message{iexec: [\iexec@cmd]^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: [\iexec@cmd]^^J}%
+      \fi%
     \endgroup%
 %    \end{macrocode}
 % Then, if required, the content of the stdout file will be printed to the log:
 %    \begin{macrocode}
-    \ifdefined\iexec@null\else
-    \ifdefined\iexec@log
+    \ifdefined\iexec@null\else%
+    \ifdefined\iexec@log%
       \message{iexec: this is the content of \iexec@stdout:^^J}%
-      \iexec@typeout{\iexec@stdout}
+      \iexec@typeout{\iexec@stdout}%
       \message{<EOF>^^J}%
     \fi\fi%
 %    \end{macrocode}
 % Then, include the produced output into the current document:
 %    \begin{macrocode}
-    \ifdefined\iexec@null\else
-    \ifdefined\iexec@quiet
+    \ifdefined\iexec@null\else%
+    \ifdefined\iexec@quiet%
       \message{iexec: Due to 'quiet' option we didn't read
       the content of '\iexec@stdout' (\pdffilesize{} bytes)^^J}%
     \else%
@@ -372,7 +383,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 % Finally, delete the file or leave it untouched:
 %    \begin{macrocode}
-    \ifdefined\iexec@null\else
+    \ifdefined\iexec@null\else%
     \ifiexec@trace%
       \message{iexec: Due to package option 'trace',
       the file '\iexec@stdout' was not deleted^^J}%
