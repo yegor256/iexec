@@ -1,4 +1,5 @@
 .DS_Store
+_changes/
 build/
 _minted-*/
 iexec.tex

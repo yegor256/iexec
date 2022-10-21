@@ -229,16 +229,6 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 
 % \section{Implementation}
 
-% \changes{v0.2.0}{2021/07/10}{Initial version}
-% \changes{v0.4.0}{2021/08/01}{Runtime verification for --shell-escape option}
-% \changes{v0.4.1}{2021/08/08}{Options trace, stdout, and quiet added}
-% \changes{v0.5.0}{2022/01/08}{Major bug fixes}
-% \changes{v0.6.0}{2022/10/09}{Additional options 'log' and 'append'}
-% \changes{v0.7.0}{2022/10/10}{Additional option 'null'}
-% \changes{v0.8.0}{2022/10/11}{Bug fixes}
-% \changes{v0.9.0}{2022/10/12}{Additional option 'stderr'}
-% \changes{v0.10.0}{2022/10/22}{Additional option 'ignore'}
-
 % First, we include \href{https://ctan.org/pkg/shellesc}{shellesc} package, which
 % we use to execute shell commands:
 %    \begin{macrocode}
@@ -413,8 +403,30 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 
 % \Finale
 
-%\clearpage
-%
-%\PrintChanges
-%\clearpage
-%\PrintIndex
+% \iexec[log]{
+%   git pull --tags;
+%   repo=yegor256/iexec;
+%   mkdir -p _changes;
+%   git tag > _changes/tags.txt;
+%   while read v; do
+%     if [ ! -e "_changes/$v.json" ]; then
+%       curl -H "Accept: application/vnd.github+json"
+%         -s "https://api.github.com/repos/$repo/releases/tags/$v"
+%         > "_changes/$v.json";
+%     fi;
+%     jq -j -r '.created_at' "_changes/$v.json" > _changes/$v.date;
+%     tr '-' '/' <_changes/$v.date;
+%     /bin/echo -n " $v ";
+%     jq -j -r '.name' "_changes/$v.json" > _changes/$v.title;
+%     sed 's/\\([\%\\\\\{\}$]\\)/\\\\\\1/g' _changes/$v.title;
+%     /bin/echo;
+%   done < _changes/tags.txt > _changes/full.txt;
+%   sort _changes/full.txt > _changes/sorted.txt;
+%   awk '\{printf "\\\\changes\{v\%s\}\{\%s\}",$2,substr($1,0,10); $1=$2=""; printf "\{\%s\}\\n",substr($0,3);\}'
+%     _changes/sorted.txt
+% }
+% \clearpage
+% \PrintChanges
+
+% \clearpage
+% \PrintIndex
