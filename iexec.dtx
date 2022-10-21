@@ -421,7 +421,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %     /bin/echo;
 %   done < _changes/tags.txt > _changes/full.txt;
 %   sort _changes/full.txt > _changes/sorted.txt;
-%   awk '\{printf "\\\\changes\{v\%s\}\{\%s\}",$2,substr($1,0,10); $1=$2=""; printf "\{\%s\}\\n",substr($0,3);\}'
+%   awk "\{printf \\"\\\\changes\{\%s\}\{\%s\}\\",\\$2,substr(\\$1,0,10); \\$1=\\$2=\\"\\"; printf \\"\{\%s\}\\n\\",substr(\\$0,3);\}"
 %     _changes/sorted.txt
 % }
 % \clearpage
