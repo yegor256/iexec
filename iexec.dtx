@@ -404,9 +404,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \Finale
 
 % \iexec[log]{
-%   git pull --tags;
+%   if [ ! -e _changes ]; then git pull --tags; mkdir -p _changes; fi;
 %   repo=yegor256/iexec;
-%   mkdir -p _changes;
 %   git tag > _changes/tags.txt;
 %   while read v; do
 %     if [ ! -e "_changes/$v.json" ]; then
