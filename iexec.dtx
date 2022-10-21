@@ -246,6 +246,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 
 % Then, we prepare to parse the options of |\iexec| command:
+% \changes{v0.10.0}{2022/10/19}{The option "ignore" suppresses the checking of "iexec.ret" value.}
+% \changes{v0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
+% \changes{v0.7.0}{2022/09/25}{The option "log" was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
 %    \begin{macrocode}
 \RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
@@ -287,6 +290,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \begin{macro}{\iexec}
 % Then, we define |\iexec| command.
 % It is implemented with the help of |\ShellEscape| from |shellesc| package:
+% \changes{v0.10.0}{2022/10/19}{The file "iexec.ret" is reused for all scripts.}
 %    \begin{macrocode}
 \makeatletter
 \newread\iexec@retfile
@@ -319,6 +323,9 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \let\}\@charrb%
 %    \end{macrocode}
 % Then, we execute it:
+% \changes{v0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into "iexec.ret" file, which is then read and checked for zero value.}
+% \changes{v0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
+% \changes{v0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
 %    \begin{macrocode}
       \def\iexec@cmd{(#2)
         \ifdefined\iexec@append>\fi>
@@ -403,29 +410,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 
 % \Finale
 
-% \iexec[log]{
-%   if [ ! -e _changes ]; then git pull --tags; mkdir -p _changes; fi;
-%   repo=yegor256/iexec;
-%   git tag > _changes/tags.txt;
-%   while read v; do
-%     if [ ! -e "_changes/$v.json" ]; then
-%       curl -H "Accept: application/vnd.github+json"
-%         -s "https://api.github.com/repos/$repo/releases/tags/$v"
-%         > "_changes/$v.json";
-%     fi;
-%     jq -j -r '.created_at' "_changes/$v.json" > _changes/$v.date;
-%     tr '-' '/' <_changes/$v.date;
-%     /bin/echo -n " $v ";
-%     jq -j -r '.name' "_changes/$v.json" > _changes/$v.title;
-%     sed 's/\\([\%\\\\\{\}$]\\)/\\\\\\1/g' _changes/$v.title;
-%     /bin/echo;
-%   done < _changes/tags.txt > _changes/full.txt;
-%   sort _changes/full.txt > _changes/sorted.txt;
-%   awk "\{printf \\"\\\\changes\{\%s\}\{\%s\}\\",\\$2,substr(\\$1,0,10); \\$1=\\$2=\\"\\"; printf \\"\{\%s\}\\n\\",substr(\\$0,3);\}"
-%     _changes/sorted.txt
-% }
-% \clearpage
-% \PrintChanges
+%\clearpage
+%\PrintChanges
 
-% \clearpage
-% \PrintIndex
+%\clearpage
+%\PrintIndex
