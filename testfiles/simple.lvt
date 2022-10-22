@@ -16,7 +16,7 @@ Hello, [\iexec{whoami}]!
 \iexec[log,quiet,trace,stdout=underscore.txt]{echo "hello_world"}
 \iexec[stdout=foo.txt]{echo $ABSENT_VARIABLE}
 
-\iexec[ignore,log]{./broken-command-doesnt-exist.sh}
+\iexec[ignore]{./broken-command-doesnt-exist.sh}
 
 \iexec[quiet,stdout=env1.txt]{echo $HOME}
 \iexec[quiet,stdout=env2.txt]{echo ${HOME}}

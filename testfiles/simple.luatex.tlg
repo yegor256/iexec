@@ -43,17 +43,9 @@ runsystem(rm foo.txt)...executed
 runsystem(rm iexec.ret)...executed
 runsystem((broken-command-doesnt-exist.sh) > iexec.tmp 2>&1; /bin/echo -n $? >
 iexec.ret)...executed
-iexec: [(broken-command-doesnt-exist.sh) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret]
-iexec: This is the content of iexec.tmp:
-sh: ./broken-command-doesnt-exist.sh: No such file or directory
-<EOF>
-iexec: Execution failure ignored, the exit code was 127 
-iexec: We are going to include the content of 'iexec.tmp'...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
-iexec: The file 'iexec.tmp' was deleted
 runsystem(rm iexec.ret)...executed
-iexec: The file 'iexec.ret' was deleted
 runsystem((echo $HOME) > env1.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
 runsystem(rm env1.txt)...executed
 runsystem(rm iexec.ret)...executed

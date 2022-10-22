@@ -392,13 +392,13 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \ifdefined\iexec@log%
         \message{iexec: Due to 'quiet' option we didn't read
         the content of '\iexec@stdout'
-        \ifdefined\pdffilesize(\pdffilesize{\iexec@stdout}
+        \ifdefined\pdffilesize (\pdffilesize{\iexec@stdout}
         bytes)\fi^^J}%
       \fi%
     \else%
       \ifdefined\iexec@log%
         \message{iexec: We are going to include the content of
-        '\iexec@stdout'\ifdefined\pdffilesize(\pdffilesize
+        '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
       \input{\iexec@stdout}%
