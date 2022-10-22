@@ -1,20 +1,25 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-runsystem((whoami) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed
+runsystem((whoami) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)...executed
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
-runsystem((echo 65536) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed
-(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
+runsystem(rm iexec.ret)...executed
+runsystem((echo 65536) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)...executed(iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
-runsystem((echo 42) > sanity.txt 2>&1; echo $? >iexec.ret)...executed
+runsystem(rm iexec.ret)...executed
+runsystem((echo 42) > sanity.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
 (sanity.txt) iexec: The content of 'sanity.txt' was included into the document
 runsystem(rm sanity.txt)...executed
-runsystem((echo "it's me" | cat) > iexec.tmp 2>&1; echo $? >iexec.ret)...execute
-d
+runsystem(rm iexec.ret)...executed
+runsystem((echo "it's me" | cat) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)..
+.executed
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
-runsystem((echo "hello_world") > iexec.tmp 2>&1; echo $? >iexec.ret)...executedrunsystem(rm iexec.tmp)...executed
+runsystem((echo "hello_world") > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)...e
+xecuted
+runsystem(rm iexec.tmp)...executed
+runsystem(rm iexec.ret)...executed
 runsystem((../echo '\begin{equation}\pi = 3.14\end{equation}') > iexec.tmp 2>&
-1; echo $? >iexec.ret)...executed
+1; /bin/echo -n $? >iexec.ret)...executed
 (iexec.tmp
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line ....
@@ -22,47 +27,66 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line ....
 ) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
-runsystem((echo "hello_world") > underscore.txt 2>&1; echo $? >iexec.ret)...exec
-uted
-iexec: [(echo "hello_world") > underscore.txt 2>&1; echo $? >iexec.ret]
+runsystem(rm iexec.ret)...executed
+runsystem((echo "hello_world") > underscore.txt 2>&1; /bin/echo -n $? >iexec.ret
+)...executed
+iexec: [(echo "hello_world") > underscore.txt 2>&1; /bin/echo -n $? >iexec.ret]
 iexec: This is the content of underscore.txt:
 hello_world
 <EOF>
 iexec: Due to 'quiet' option we didn't read the content of 'underscore.txt' 
-iexec: Due to 'trace' option, the file 'underscore.txt' was not deleted
-runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1; echo $? >iexec.ret)...executed
+iexec: Due to 'trace' package option, the files 'underscore.txt' and 'iexec.ret' were not deleted
+runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1; /bin/echo -n $? >iexec.ret)...
+executed
 (foo.txt) iexec: The content of 'foo.txt' was included into the document
 runsystem(rm foo.txt)...executed
-runsystem((broken-command-doesnt-exist.sh) > iexec.tmp 2>&1)...failed 
+runsystem(rm iexec.ret)...executed
+runsystem((broken-command-doesnt-exist.sh) > iexec.tmp 2>&1; /bin/echo -n $? >
+iexec.ret)...executed
+iexec: [(broken-command-doesnt-exist.sh) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret]
+iexec: This is the content of iexec.tmp:
+sh: ./broken-command-doesnt-exist.sh: No such file or directory
+<EOF>
+iexec: Execution failure ignored, the exit code was 127 
+iexec: We are going to include the content of 'iexec.tmp'...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
-runsystem((echo $HOME) > env1.txt 2>&1; echo $? >iexec.ret)...executed
+iexec: The file 'iexec.tmp' was deleted
+runsystem(rm iexec.ret)...executed
+iexec: The file 'iexec.ret' was deleted
+runsystem((echo $HOME) > env1.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
 runsystem(rm env1.txt)...executed
-runsystem((echo ${HOME}) > env2.txt 2>&1; echo $? >iexec.ret)...executed
+runsystem(rm iexec.ret)...executed
+runsystem((echo ${HOME}) > env2.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
 runsystem(rm env2.txt)...executed
-runsystem((echo '%\{}') > iexec.tmp 2>&1; echo $? >iexec.ret)...executed
+runsystem(rm iexec.ret)...executed
+runsystem((echo '%\{}') > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)...executed
 runsystem(rm iexec.tmp)...executed
-runsystem((echo 5) > a.txt 2>&1; echo $? >iexec.ret)...executed
-iexec: [(echo 5) > a.txt 2>&1; echo $? >iexec.ret]
+runsystem(rm iexec.ret)...executed
+runsystem((echo 5) > a.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
+iexec: [(echo 5) > a.txt 2>&1; /bin/echo -n $? >iexec.ret]
 iexec: This is the content of a.txt:
 5
 <EOF>
 iexec: Due to 'quiet' option we didn't read the content of 'a.txt' 
-iexec: Due to 'trace' option, the file 'a.txt' was not deleted
-runsystem((echo 6) > iexec.tmp 2>&1; echo $? >iexec.ret)...executed
+iexec: Due to 'trace' package option, the files 'a.txt' and 'iexec.ret' were not deleted
+runsystem((echo 6) > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret)...executed
 \foo=\read...
-runsystem((echo 'hi, ') >> app.txt 2>&1; echo $? >iexec.ret)...executed
+runsystem((echo 'hi, ') >> app.txt 2>&1; /bin/echo -n $? >iexec.ret)...executedrunsystem(rm app.txt)...executed
+runsystem(rm iexec.ret)...executed
+runsystem((echo 'Jeff!') >> app.txt 2>&1; /bin/echo -n $? >iexec.ret)...executed
 runsystem(rm app.txt)...executed
-runsystem((echo 'Jeff!') >> app.txt 2>&1; echo $? >iexec.ret)...executed
-runsystem(rm app.txt)...executed
-runsystem((date) > /dev/null 2>&1; echo $? >iexec.ret)...executed
-runsystem((echo 'Hello, \LaTeX!') > iexec.tmp 2>&1; echo $? >iexec.ret)...execut
-ed
-iexec: [(echo 'Hello, \LaTeX!') > iexec.tmp 2>&1; echo $? >iexec.ret]
+runsystem(rm iexec.ret)...executed
+runsystem((date) > /dev/null 2>&1; /bin/echo -n $? >iexec.ret)...executed
+runsystem((echo 'Hello, \LaTeX!') > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret).
+..executed
+iexec: [(echo 'Hello, \LaTeX!') > iexec.tmp 2>&1; /bin/echo -n $? >iexec.ret]
 iexec: This is the content of iexec.tmp:
 Hello, \LaTeX!
 <EOF>
-iexec: We include the content of 'iexec.tmp'...
+iexec: We are going to include the content of 'iexec.tmp'...
 (iexec.tmp) iexec: The content of 'iexec.tmp' was included into the document
 runsystem(rm iexec.tmp)...executed
 iexec: The file 'iexec.tmp' was deleted
+runsystem(rm iexec.ret)...executed
+iexec: The file 'iexec.ret' was deleted

@@ -93,15 +93,16 @@
 % \end{document}
 % \end{docshot}
 
-% \DescribeMacro{\iexec} The only command provided by this package is |\iexec| \oarg{options} \marg{cmd}.
+% \DescribeMacro{\iexec} The only command provided by this package is
+% |\iexec| \oarg{options} \marg{cmd}.
 % Its only mandatory argument \meta{cmd} is the command to be executed
-% through the terminal shell (bash, or whatever is set as the default one
-% on your user console).
+% through the terminal shell (|bash|, or whatever is set as the default one
+% in your console).
 
 % You have to run |pdflatex| (or just |latex|)
 % with the |--shell-escape| flag
-% in order to let |shellesc| (the package we use)
-% to execute your shell command.
+% in order to let \href{https://ctan.org/pkg/shellesc}{shellesc}
+% execute your shell command.
 
 % \section{Options}
 
@@ -145,6 +146,19 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %\fi
 \begin{verbatim}
 Today is \iexec[stderr=my.txt]{broken-command}.
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+
+% \DescribeMacro{exit}
+% The exit code of the command it saved into a file. You can change the name of it
+% using |exit| option:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+Today is \iexec[exit=code.txt]{./broken-command.sh}.
 \end{verbatim}
 %\iffalse
 %</verb>
@@ -246,14 +260,17 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %    \end{macrocode}
 
 % Then, we prepare to parse the options of |\iexec| command:
-% \changes{v0.10.0}{2022/10/19}{The option "ignore" suppresses the checking of "iexec.ret" value.}
-% \changes{v0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
-% \changes{v0.7.0}{2022/09/25}{The option "log" was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
+% \changes{0.10.0}{2022/10/19}{The option "ignore" suppresses the checking of "iexec.ret" value.}
+% \changes{0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
+% \changes{0.7.0}{2022/09/25}{The option "log" was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
+% \changes{0.12.0}{2022/10/22}{The option "exit" allows to change the name of the file with exit code.}
 %    \begin{macrocode}
 \RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
   /iexec/.is family,
   /iexec,
+  exit/.store in = \iexec@exit,
+  exit/.default = iexec.ret,
   stdout/.store in = \iexec@stdout,
   stdout/.default = iexec.tmp,
   stderr/.store in = \iexec@stderr,
@@ -263,7 +280,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   null/.store in = \iexec@null,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
-  stdout
+  stdout,exit
 }\makeatother
 %    \end{macrocode}
 
@@ -290,10 +307,10 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \begin{macro}{\iexec}
 % Then, we define |\iexec| command.
 % It is implemented with the help of |\ShellEscape| from |shellesc| package:
-% \changes{v0.10.0}{2022/10/19}{The file "iexec.ret" is reused for all scripts.}
+% \changes{0.10.0}{2022/10/19}{The file "iexec.ret" is reused for all scripts.}
 %    \begin{macrocode}
 \makeatletter
-\newread\iexec@retfile
+\newread\iexec@exitfile
 \newcommand\iexec[2][]{%
   \begingroup%
     \pgfqkeys{/iexec}{#1}%
@@ -323,15 +340,16 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \let\}\@charrb%
 %    \end{macrocode}
 % Then, we execute it:
-% \changes{v0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into "iexec.ret" file, which is then read and checked for zero value.}
-% \changes{v0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
-% \changes{v0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
+% \changes{0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into "iexec.ret" file, which is then read and checked for zero value.}
+% \changes{0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
+% \changes{0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
+% \changes{0.12.0}{2022/10/22}{The file with exit code now contains just numbers, without end of line.}
 %    \begin{macrocode}
       \def\iexec@cmd{(#2)
         \ifdefined\iexec@append>\fi>
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
-        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi
-        \ifdefined\iexec@ignore\else; echo $? >iexec.ret\fi}
+        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
+        /bin/echo -n $? >\iexec@exit}
       \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
@@ -350,14 +368,20 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \message{<EOF>^^J}%
     \fi\fi%
 %    \end{macrocode}
-% Then, we check exit code:
+% Then, we check exit code, unless there is |ignore| option:
 %    \begin{macrocode}
-    \ifdefined\iexec@log\else%
-      \immediate\openin\iexec@retfile=iexec.ret%
-      \read\iexec@retfile to \iexec@ret%
-      \immediate\closein\iexec@retfile%
-      \ifnum\iexec@ret=0\else%
-        \PackageError{iexec}{Exit code is \iexec@ret}{}%
+    \immediate\openin\iexec@exitfile=\iexec@exit%
+    \read\iexec@exitfile to \iexec@code%
+    \immediate\closein\iexec@exitfile%
+    \ifnum\iexec@code=0\else%
+      \ifdefined\iexec@ignore%
+        \ifdefined\iexec@log%
+          \message{iexec: Execution failure ignored,
+            the exit code was \iexec@code^^J}%
+        \fi%
+      \else%
+        \PackageError{iexec}{Execution failure,
+          the exit code was \iexec@code}{}%
       \fi%
     \fi%
 %    \end{macrocode}
@@ -373,7 +397,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \fi%
     \else%
       \ifdefined\iexec@log%
-        \message{iexec: We include the content of
+        \message{iexec: We are going to include the content of
         '\iexec@stdout'\ifdefined\pdffilesize(\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
@@ -388,18 +412,24 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
     \ifiexec@trace%
       \ifdefined\iexec@log%
         \message{iexec: Due to package option 'trace',
-        the file '\iexec@stdout' was not deleted^^J}%
+        the files '\iexec@stdout' and `\iexec@exit` were
+        not deleted^^J}%
       \fi%
     \else%
       \ifdefined\iexec@traceit%
         \ifdefined\iexec@log%
-          \message{iexec: Due to 'trace' option,
-          the file '\iexec@stdout' was not deleted^^J}%
+          \message{iexec: Due to 'trace' package option,
+          the files '\iexec@stdout' and '\iexec@exit'
+          were not deleted^^J}%
         \fi%
       \else%
         \ShellEscape{rm \iexec@stdout}%
         \ifdefined\iexec@log%
           \message{iexec: The file '\iexec@stdout' was deleted^^J}%
+        \fi%
+        \ShellEscape{rm \iexec@exit}%
+        \ifdefined\iexec@log%
+          \message{iexec: The file '\iexec@exit' was deleted^^J}%
         \fi%
       \fi%
     \fi\fi%
