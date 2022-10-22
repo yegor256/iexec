@@ -263,7 +263,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{0.10.0}{2022/10/19}{The option "ignore" suppresses the checking of "iexec.ret" value.}
 % \changes{0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
 % \changes{0.7.0}{2022/09/25}{The option "log" was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
-% \changes{0.12.0}{2022/10/22}{The option "exit" allows to change the name of the file with exit code.}
+% \changes{0.11.0}{2022/10/22}{The option "exit" allows to change the name of the file with exit code.}
 %    \begin{macrocode}
 \RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
@@ -343,7 +343,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into "iexec.ret" file, which is then read and checked for zero value.}
 % \changes{0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
 % \changes{0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
-% \changes{0.12.0}{2022/10/22}{The file with exit code now contains just numbers, without end of line.}
+% \changes{0.11.0}{2022/10/22}{The file with exit code now contains just numbers, without end of line.}
 %    \begin{macrocode}
       \def\iexec@cmd{(#2)
         \ifdefined\iexec@append>\fi>
