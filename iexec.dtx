@@ -77,6 +77,9 @@
 %
 % \maketitle
 %
+% \textbf{NB!}
+% This package doesn't work on Windows!
+%
 % \section{Introduction}
 %
 % This package helps you execute shell commands right from the
@@ -349,7 +352,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
         \ifdefined\iexec@append>\fi>
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
         \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
-        /bin/echo -n $? >\iexec@exit}
+        /bin/echo -n $?\% >\iexec@exit}
       \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to TeX log:
