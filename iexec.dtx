@@ -347,6 +347,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
 % \changes{0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
 % \changes{0.11.0}{2022/10/22}{The file with exit code now contains just numbers, without end of line.}
+% \changes{0.11.1}{2022/10/23}{When exit code is printed to the file, we add percentchar at the end of line in order to avoid extra space when reading it back.}
 %    \begin{macrocode}
       \def\iexec@cmd{(#2)
         \ifdefined\iexec@append>\fi>
