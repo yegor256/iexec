@@ -56,6 +56,7 @@
 \documentclass{ltxdoc}
 \usepackage[tt=false, type1=true]{libertine}
 \usepackage{microtype}
+\usepackage{xcolor}
 \usepackage[dtx]{docshots}
 \usepackage{iexec}
 \usepackage{href-ul}
@@ -77,7 +78,7 @@
 %
 % \maketitle
 %
-% \textbf{NB!}
+% \textbf{\color{red}NB!}
 % This package doesn't work on Windows!
 %
 % \section{Introduction}
@@ -327,7 +328,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
     \fi%
     \begingroup%
 %    \end{macrocode}
-% Then, start the log from a clean line:
+% Then, we start the log from a clean line:
 %    \begin{macrocode}
       \ifdefined\iexec@log%
         \message{^^J}%
@@ -342,7 +343,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \let\{\@charlb%
       \let\}\@charrb%
 %    \end{macrocode}
-% Then, we execute it:
+% Then, we execute it and save exit code into a file (where we also add \% in order to trim the content to exactly one number, as suggested \href{https://tex.stackexchange.com/questions/662756}{here}):
 % \changes{0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into "iexec.ret" file, which is then read and checked for zero value.}
 % \changes{0.8.0}{2022/10/05}{The option "null" was introduced, allowing redirection of stdout to "/dev/null". Doesn't work on Windows, though.}
 % \changes{0.9.0}{2022/10/15}{The option "stderr" was introduced, allowing redirection of stderr to a file. Without this option specified, stderr will go to stdout.}
@@ -356,14 +357,14 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
         /bin/echo -n $?\% >\iexec@exit}
       \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
-% Then, a message is printed to TeX log:
+% Then, a message is printed to \TeX{} log:
 %    \begin{macrocode}
       \ifdefined\iexec@log%
         \message{iexec: [\iexec@cmd]^^J}%
       \fi%
     \endgroup%
 %    \end{macrocode}
-% Then, if required, the content of the stdout file will be printed to the log:
+% Then, if required, we print the content of the stdout file to \TeX{} log:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@log%
@@ -372,11 +373,14 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \message{<EOF>^^J}%
     \fi\fi%
 %    \end{macrocode}
-% Then, we check exit code, unless there is |ignore| option:
+% Then, we read back the exit code, from the file:
 %    \begin{macrocode}
     \immediate\openin\iexec@exitfile=\iexec@exit%
     \read\iexec@exitfile to \iexec@code%
     \immediate\closein\iexec@exitfile%
+%    \end{macrocode}
+% Then, we check whether it's zero or not (if not zero, we either print a message or fail the build, depending on the presence of |ignore| option):
+%    \begin{macrocode}
     \ifnum\iexec@code=0\else%
       \ifdefined\iexec@ignore%
         \ifdefined\iexec@log%
@@ -389,7 +393,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \fi%
     \fi%
 %    \end{macrocode}
-% Then, include the produced output into the current document:
+% Then, we include the produced output into the current document:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@quiet%
@@ -410,7 +414,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       was included into the document^^J}%
     \fi\fi%
 %    \end{macrocode}
-% Finally, delete the file or leave it untouched:
+% Finally, we delete the file or leave it untouched:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
     \ifiexec@trace%
