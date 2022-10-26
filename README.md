@@ -18,6 +18,8 @@ Today is \iexec{date +\%e-\%b-\%Y | tr -d '\\n'}.
 \end{document}
 ```
 
+Otherwise, you can download [`iexec.sty`](https://raw.githubusercontent.com/objectionary/eolang.sty/gh-pages/iexec/iexec.sty) and add to your project.
+
 The full example and all commands are available in the 
 [`iexec.pdf`](https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/iexec/iexec.pdf) file.
 

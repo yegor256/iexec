@@ -354,7 +354,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
         \ifdefined\iexec@append>\fi>
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
         \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
-        /bin/echo -n $?\% >\iexec@exit}
+        /bin/echo -n $?\% >\iexec@exit}%
       \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to \TeX{} log:
@@ -364,20 +364,30 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
       \fi%
     \endgroup%
 %    \end{macrocode}
-% Then, if required, we print the content of the stdout file to \TeX{} log:
-%    \begin{macrocode}
-    \ifdefined\iexec@null\else%
-    \ifdefined\iexec@log%
-      \message{iexec: This is the content of \iexec@stdout:^^J}%
-      \iexec@typeout{\iexec@stdout}%
-      \message{<EOF>^^J}%
-    \fi\fi%
-%    \end{macrocode}
 % Then, we read back the exit code, from the file:
 %    \begin{macrocode}
     \immediate\openin\iexec@exitfile=\iexec@exit%
     \read\iexec@exitfile to \iexec@code%
     \immediate\closein\iexec@exitfile%
+%    \end{macrocode}
+% Then, if required, we print the content of the stdout file to \TeX{} log:
+% \changes{0.11.2}{2022/10/25}{If execution fails, we print the content of 'stdout' anyway, even if the 'log' is not turned on.}
+%    \begin{macrocode}
+    \ifdefined\iexec@null\else%
+    \ifdefined\iexec@log%
+      \message{iexec: This is the content of '\iexec@stdout':^^J}%
+      \iexec@typeout{\iexec@stdout}%
+      \message{<EOF>^^J}%
+    \else%
+      \ifnum\iexec@code=0\else%
+        \ifdefined\iexec@ignore\else%
+          \message{iexec: See the content of '\iexec@stdout'
+            after failure:^^J}%
+          \iexec@typeout{\iexec@stdout}%
+          \message{<EOF>^^J}%
+        \fi%
+      \fi%
+    \fi\fi%
 %    \end{macrocode}
 % Then, we check whether it's zero or not (if not zero, we either print a message or fail the build, depending on the presence of |ignore| option):
 %    \begin{macrocode}
