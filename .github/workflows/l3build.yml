@@ -18,7 +18,7 @@ jobs:
         with:
           update-all-packages: true
           package-file: DEPENDS.txt
-          packages: scheme-basic xetex ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build docshots
+          packages: scheme-basic xetex ffcode libertine minted fvextra catchfile xstring framed tcolorbox environ pgf l3build docshots pgfopts
       - run: l3build ctan --show-log-on-error --halt-on-error || echo 1
       - run: cat build/doc/iexec.log
       - run: exit 1
