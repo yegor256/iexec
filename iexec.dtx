@@ -114,7 +114,7 @@
 % \DescribeMacro{quiet}
 % If you don't want the output to be visible,
 % use |\phantom\{\iexec{...}}|.
-% Otherwise, you can use |quiet| option:
+% Otherwise, you can use ``|quiet|'' option:
 %\iffalse
 %<*verb>
 %\fi
@@ -130,7 +130,7 @@ I just want to delete some file:
 
 % \DescribeMacro{stdout}
 % The output of your code is saved into the file provided as an
-% optional argument of |\iexec| (the default value is |iexec.tmp|):
+% optional argument of |\iexec| (the default value is ``|iexec.tmp|''):
 %\iffalse
 %<*verb>
 %\fi
@@ -145,7 +145,7 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 % \DescribeMacro{stderr}
 % The error output of the code is saved into the file provided as an
 % optional argument of |\iexec| (by default the error output
-% is streamed into |stdout|):
+% is streamed into ``|stdout|''):
 %\iffalse
 %<*verb>
 %\fi
@@ -157,8 +157,8 @@ Today is \iexec[stderr=my.txt]{broken-command}.
 %\fi
 
 % \DescribeMacro{exit}
-% The exit code of the command it saved into a file. You can change the name of it
-% using |exit| option:
+% The exit code of the command is saved into a file. You can change the name of it
+% using ``|exit|'' option:
 %\iffalse
 %<*verb>
 %\fi
@@ -171,10 +171,10 @@ Today is \iexec[exit=code.txt]{./broken-command.sh}.
 
 % \DescribeMacro{trace}
 % The file specified will be deleted right after its usage. If you don't
-% want this to happen, use |trace| package option: all files will remain
+% want this to happen, use ``|trace|'' package option: all files will remain
 % in the directory where they were created.
 % It's possible to turn tracing on globbaly, for the entire document, using
-% |trace| option of the package:
+% ``|trace|'' option of the package:
 %\iffalse
 %<*verb>
 %\fi
@@ -220,7 +220,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 
 % \DescribeMacro{null}
-% The stdout of the command will be sent to |/dev/null|:
+% The stdout of the command will be sent to ``|/dev/null|'':
 %\iffalse
 %<*verb>
 %\fi
@@ -233,7 +233,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 
 % \DescribeMacro{ignore}
 % By default, we report an error if exit code is not equal to zero. You can suppress
-% this with |ignore| option:
+% this with ``|ignore|'' option:
 %\iffalse
 %<*verb>
 %\fi
