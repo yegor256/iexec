@@ -18,7 +18,6 @@ jobs:
         with:
           update-all-packages: true
           package-file: DEPENDS.txt
-          packages: scheme-basic xetex ffcode libertine tools minted fvextra catchfile xstring framed tcolorbox environ pgf l3build docshots pgfopts href-ul hypdoc
       - run: l3build ctan --show-log-on-error --halt-on-error
       - uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:

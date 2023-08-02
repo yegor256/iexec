@@ -3,13 +3,11 @@ docker:
 install: |-
   sudo gem install texsc:0.6.0
   sudo gem install texqc:0.6.0
-  sudo apt-get -y update
-  sudo apt-get -y install aspell
-  sudo apt-get -y install ghostscript
   sudo tlmgr option repository ctan
   sudo tlmgr --verify-repo=none update --self
-  sudo tlmgr --verify-repo=none install l3build docshots pgfopts href-ul hypdoc
-merge:
+  sudo tlmgr --verify-repo=none install $(cut -d' ' -f2 DEPENDS.txt | uniq)
+  sudo tlmgr --verify-repo=none update $(cut -d' ' -f2 DEPENDS.txt | uniq)
+  rge:
   script: |-
     l3build check
 release:
