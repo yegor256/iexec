@@ -12,13 +12,14 @@ and then use in the preamble:
 
 ```tex
 \documentclass{article}
-\usepackage{iexec}
+\usepackage[unskip]{iexec}
 \begin{document}
-Today is \iexec{date +\%e-\%b-\%Y | tr -d '\\n'}.
+Today is \iexec{date +\%e-\%b-\%Y}.
 \end{document}
 ```
 
-Otherwise, you can download [`iexec.sty`](https://raw.githubusercontent.com/yegor256/iexec/gh-pages/iexec/iexec.sty) and add to your project.
+Otherwise, you can download 
+[`iexec.sty`](https://yegor256.github.io/iexec/iexec.sty) and add to your project.
 
 The full example and all commands are available in the 
 [`iexec.pdf`](https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/iexec/iexec.pdf) file.

@@ -19,6 +19,11 @@ jobs:
           update-all-packages: true
           package-file: DEPENDS.txt
       - run: l3build ctan --show-log-on-error --halt-on-error
+      - run: |
+          mkdir build/gh-pages
+          cp build/distrib/tds/tex/latex/iexec/iexec.sty build/gh-pages
+          sed -i "s/0\.0\.0/$(date +%H.%M.%S)/g" build/gh-pages/iexec.sty
+          sed -i "s/0000-00-00/$(date +%Y-%m-%d)/g" build/gh-pages/iexec.sty
       - uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
