@@ -1,6 +1,3 @@
-hard expl3
-hard pgfkeys
-hard shellesc
 hard xkeyval
 soft catchfile
 soft docshots
