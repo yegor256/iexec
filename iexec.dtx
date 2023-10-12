@@ -224,6 +224,19 @@ Today is \iexec{date +\%Y}!
 %</verb>
 %\fi
 
+% \changes{0.13.0}{2023/10/12}{The option ``\texttt{shell}'' adds the ability to configure the shell to be used, instead of the default |/bin/sh|.}
+% \DescribeMacro{shell}
+% By default, the |/bin/sh| shell is used (here is \href{https://tex.stackexchange.com/questions/698312/how-to-change-the-shell-used-by-write18}{why}). You can change this by using the |shell| package option:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\usepackage[shell=bash]{iexec}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+
 % \DescribeMacro{log}
 % The ``stdout'' produced will be printed in the \TeX{} log:
 %\iffalse
@@ -296,6 +309,8 @@ Today is \iexec{date +\%Y}!
   exit/.default = iexec.ret,
   stdout/.store in = \iexec@stdout,
   stdout/.default = iexec.tmp,
+  shell/.store in = \iexec@shell,
+  shell/.default = bash,
   stderr/.store in = \iexec@stderr,
   trace/.store in = \iexec@traceit,
   append/.store in = \iexec@append,
@@ -304,7 +319,7 @@ Today is \iexec{date +\%Y}!
   unskip/.store in = \iexec@unskip,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
-  stdout,exit
+  shell,stdout,exit
 }\makeatother
 %    \end{macrocode}
 
@@ -377,7 +392,7 @@ Today is \iexec{date +\%Y}!
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
         \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
         /bin/echo -n \string$?\% >\iexec@exit}%
-      \ShellEscape{\iexec@cmd}%
+      \ShellEscape{\iexec@shell\space -c '\iexec@cmd'}%
 %    \end{macrocode}
 % Then, a message is printed to \TeX{} log:
 %    \begin{macrocode}
