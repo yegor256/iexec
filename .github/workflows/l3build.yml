@@ -28,6 +28,6 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
-          folder: build/distrib/tds/tex/latex
+          folder: build/gh-pages
           clean: true
         if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-20.04'
