@@ -48,6 +48,7 @@
 
 
 
+
 \RequirePackage{shellesc}
 
 \RequirePackage{xkeyval}
@@ -70,6 +71,7 @@
   append/.store in = \iexec@append,
   log/.store in = \iexec@log,
   null/.store in = \iexec@null,
+  unskip/.store in = \iexec@unskip,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
   stdout,exit
@@ -160,6 +162,7 @@
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
       \input{\iexec@stdout}%
+      \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
     \fi\fi%
