@@ -94,7 +94,7 @@
 % \pagestyle{empty}
 % \begin{document}
 % Today is \textbf{%
-%   \iexec{date +\%e-\%b-\%Y}\unskip}!
+%   \iexec{date +\%e-\%b-\%Y}}\unskip!
 % \end{document}
 % \end{docshot}
 
@@ -207,6 +207,23 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %</verb>
 %\fi
 
+% \DescribeMacro{unskip}
+% In order to remove the tailing spacing after the content, you may use |unskip| package option,
+% which will append |\unskip| commmand to every |\iexec|:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\documentclass{article}
+\usepackage[unskip]{iexec}
+\begin{document}
+Today is \iexec{date +\%Y}!
+\end{document}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+
 % \DescribeMacro{log}
 % The ``stdout'' produced will be printed in the \TeX{} log:
 %\iffalse
@@ -269,6 +286,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 % \changes{0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
 % \changes{0.7.0}{2022/09/25}{The option ``\texttt{log}'' was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
 % \changes{0.11.0}{2022/10/22}{The option ``\texttt{exit}'' allows to change the name of the file with exit code.}
+% \changes{0.12.0}{2023/10/12}{The option ``\texttt{unskip}'' adds \texttt{\char`\\unskip} after each \texttt{\char`\\iexec}, in order to trip the tailing end of line space.}
 %    \begin{macrocode}
 \RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
@@ -283,6 +301,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
   append/.store in = \iexec@append,
   log/.store in = \iexec@log,
   null/.store in = \iexec@null,
+  unskip/.store in = \iexec@unskip,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
   stdout,exit
@@ -423,6 +442,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
       \input{\iexec@stdout}%
+      \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
     \fi\fi%
