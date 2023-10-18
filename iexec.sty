@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2023-10-12 08.49.26 Inputable Shell Executions]
+[2023-10-18 02.19.26 Inputable Shell Executions]
 
 
 
@@ -67,8 +67,6 @@
   exit/.default = iexec.ret,
   stdout/.store in = \iexec@stdout,
   stdout/.default = iexec.tmp,
-  shell/.store in = \iexec@shell,
-  shell/.default = bash,
   stderr/.store in = \iexec@stderr,
   trace/.store in = \iexec@traceit,
   append/.store in = \iexec@append,
@@ -77,7 +75,7 @@
   unskip/.store in = \iexec@unskip,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
-  shell,stdout,exit
+  stdout,exit
 }\makeatother
 
 \RequirePackage{expl3}
@@ -116,7 +114,7 @@
         \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
         \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
         /bin/echo -n \string$?\% >\iexec@exit}%
-      \ShellEscape{\iexec@shell\space -c '\iexec@cmd'}%
+      \ShellEscape{\iexec@cmd}%
       \ifdefined\iexec@log%
         \message{iexec: [\iexec@cmd]^^J}%
       \fi%
