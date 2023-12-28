@@ -448,8 +448,8 @@ Today is \iexec{date +\%Y}!
       \IfFileExists
         {\iexec@stdout}
         {\input{\iexec@stdout}}
-        {\PackageError{iexec}{The output file is absent,
-          can't input it: "\iexec@stdout"}{}}%
+        {\PackageError{iexec}{The "\iexec@stdout" file is absent
+          after processing, looks like some internal error}{}}%
       \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
