@@ -404,7 +404,7 @@ Today is \iexec{date +\%Y}!
       \message{iexec: This is the content of '\iexec@stdout':^^J}%
       \IfFileExists
         {\iexec@stdout}
-        {\iexec@typeout{}}
+        {\iexec@typeout{\iexec@stdout}}
         {\PackageError{iexec}{The "\iexec@stdout" file is absent
           after processing, looks like some internal error}{}}%
       \message{<EOF>^^J}%
