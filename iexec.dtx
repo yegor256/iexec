@@ -400,24 +400,30 @@ Today is \iexec{date +\%Y}!
 % \changes{0.11.2}{2022/10/25}{If execution fails, we print the content of ``\texttt{stdout}'' anyway, even if the ``\texttt{log}'' is not turned on.}
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
-    \ifdefined\iexec@log%
-      \message{iexec: This is the content of '\iexec@stdout':^^J}%
       \IfFileExists
         {\iexec@stdout}
-        {\iexec@typeout{\iexec@stdout}}
+        {}
         {\PackageError{iexec}{The "\iexec@stdout" file is absent
           after processing, looks like some internal error}{}}%
-      \message{<EOF>^^J}%
-    \else%
-      \ifnum\iexec@code=0\else%
-        \ifdefined\iexec@ignore\else%
-          \message{iexec: See the content of '\iexec@stdout'
-            after failure:^^J}%
-          \iexec@typeout{\iexec@stdout}%
-          \message{<EOF>^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: This is the content of '\iexec@stdout':^^J}%
+        \IfFileExists
+          {\iexec@stdout}
+          {\iexec@typeout{\iexec@stdout}}
+          {\PackageError{iexec}{The "\iexec@stdout" file is absent
+            after processing, looks like some internal error}{}}%
+        \message{<EOF>^^J}%
+      \else%
+        \ifnum\iexec@code=0\else%
+          \ifdefined\iexec@ignore\else%
+            \message{iexec: See the content of '\iexec@stdout'
+              after failure:^^J}%
+            \iexec@typeout{\iexec@stdout}%
+            \message{<EOF>^^J}%
+          \fi%
         \fi%
       \fi%
-    \fi\fi%
+    \fi%
 %    \end{macrocode}
 % Then, we check whether it's zero or not (if not zero, we either print a message or fail the build, depending on the presence of |ignore| option):
 %    \begin{macrocode}
@@ -449,11 +455,7 @@ Today is \iexec{date +\%Y}!
         '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
-      \IfFileExists
-        {\iexec@stdout}
-        {\input{\iexec@stdout}}
-        {\PackageError{iexec}{The "\iexec@stdout" file is absent
-          after processing, looks like some internal error}{}}%
+      \input{\iexec@stdout}%
       \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
