@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2023-12-28 10.56.20 Inputable Shell Executions]
+[2023-12-28 11.28.50 Inputable Shell Executions]
 
 
 
@@ -125,7 +125,11 @@
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@log%
       \message{iexec: This is the content of '\iexec@stdout':^^J}%
-      \iexec@typeout{\iexec@stdout}%
+      \IfFileExists
+        {\iexec@stdout}
+        {\iexec@typeout{}}
+        {\PackageError{iexec}{The "\iexec@stdout" file is absent
+          after processing, looks like some internal error}{}}%
       \message{<EOF>^^J}%
     \else%
       \ifnum\iexec@code=0\else%
