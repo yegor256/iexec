@@ -402,7 +402,11 @@ Today is \iexec{date +\%Y}!
     \ifdefined\iexec@null\else%
     \ifdefined\iexec@log%
       \message{iexec: This is the content of '\iexec@stdout':^^J}%
-      \iexec@typeout{\iexec@stdout}%
+      \IfFileExists
+        {\iexec@stdout}
+        {\iexec@typeout{}}
+        {\PackageError{iexec}{The "\iexec@stdout" file is absent
+          after processing, looks like some internal error}{}}%
       \message{<EOF>^^J}%
     \else%
       \ifnum\iexec@code=0\else%
