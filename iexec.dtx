@@ -445,7 +445,11 @@ Today is \iexec{date +\%Y}!
         '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
-      \input{\iexec@stdout}%
+      \IfFileExists
+        {\iexec@stdout}
+        {\input{\iexec@stdout}}
+        {\PackageError{iexec}{The output file is absent,
+          can't input it: "\iexec@stdout"}{}}%
       \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
