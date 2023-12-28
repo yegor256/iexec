@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2023-12-28 12.38.11 Inputable Shell Executions]
+[2023-12-28 12.40.50 Inputable Shell Executions]
 
 
 
@@ -123,24 +123,30 @@
     \read\iexec@exitfile to \iexec@code%
     \immediate\closein\iexec@exitfile%
     \ifdefined\iexec@null\else%
-    \ifdefined\iexec@log%
-      \message{iexec: This is the content of '\iexec@stdout':^^J}%
       \IfFileExists
         {\iexec@stdout}
-        {\iexec@typeout{\iexec@stdout}}
+        {}
         {\PackageError{iexec}{The "\iexec@stdout" file is absent
           after processing, looks like some internal error}{}}%
-      \message{<EOF>^^J}%
-    \else%
-      \ifnum\iexec@code=0\else%
-        \ifdefined\iexec@ignore\else%
-          \message{iexec: See the content of '\iexec@stdout'
-            after failure:^^J}%
-          \iexec@typeout{\iexec@stdout}%
-          \message{<EOF>^^J}%
+      \ifdefined\iexec@log%
+        \message{iexec: This is the content of '\iexec@stdout':^^J}%
+        \IfFileExists
+          {\iexec@stdout}
+          {\iexec@typeout{\iexec@stdout}}
+          {\PackageError{iexec}{The "\iexec@stdout" file is absent
+            after processing, looks like some internal error}{}}%
+        \message{<EOF>^^J}%
+      \else%
+        \ifnum\iexec@code=0\else%
+          \ifdefined\iexec@ignore\else%
+            \message{iexec: See the content of '\iexec@stdout'
+              after failure:^^J}%
+            \iexec@typeout{\iexec@stdout}%
+            \message{<EOF>^^J}%
+          \fi%
         \fi%
       \fi%
-    \fi\fi%
+    \fi%
     \ifnum\iexec@code=0\else%
       \ifdefined\iexec@ignore%
         \ifdefined\iexec@log%
@@ -166,11 +172,7 @@
         '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
-      \IfFileExists
-        {\iexec@stdout}
-        {\input{\iexec@stdout}}
-        {\PackageError{iexec}{The "\iexec@stdout" file is absent
-          after processing, looks like some internal error}{}}%
+      \input{\iexec@stdout}%
       \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
