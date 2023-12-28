@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2023-12-16 04.35.03 Inputable Shell Executions]
+[2023-12-28 10.55.49 Inputable Shell Executions]
 
 
 
@@ -162,7 +162,11 @@
         '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
         {\iexec@stdout} bytes)\fi...^^J}%
       \fi%
-      \input{\iexec@stdout}%
+      \IfFileExists
+        {\iexec@stdout}
+        {\input{\iexec@stdout}}
+        {\PackageError{iexec}{The output file is absent,
+          can't input it: "\iexec@stdout"}{}}%
       \ifdefined\iexec@unskip\unskip\fi%
       \message{iexec: The content of '\iexec@stdout'
       was included into the document^^J}%
