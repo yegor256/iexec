@@ -289,17 +289,19 @@ Today is \iexec{date +\%Y}!
 \RequirePackage{shellesc}
 %    \end{macrocode}
 
-% Then, we parse package options:
+% Then, we parse package options, with the help
+% of \href{https://ctan.org/pkg/pgfopts}{pgfopts}:
 %    \begin{macrocode}
-\RequirePackage{xkeyval}
-\makeatletter
-\newif\ifiexec@trace
-\DeclareOptionX{trace}{\iexec@tracetrue}
-\ProcessOptionsX\relax
-\makeatother
+\RequirePackage{pgfopts}
+\pgfkeys{
+  /iexec/.cd,
+  trace/.store in=\iexec@trace,
+}
+\ProcessPgfPackageOptions{/iexec}
 %    \end{macrocode}
 
-% Then, we prepare to parse the options of |\iexec| command:
+% Then, we prepare to parse the options of |\iexec| command, with the help
+% of \href{https://ctan.org/pkg/pgfkeys}{pgfkeys}:
 % \changes{0.10.0}{2022/10/19}{The option ``\texttt{ignore}'' suppresses the checking of ``\texttt{iexec.ret}'' value.}
 % \changes{0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
 % \changes{0.7.0}{2022/09/25}{The option ``\texttt{log}'' was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
@@ -478,7 +480,7 @@ Today is \iexec{date +\%Y}!
 % Finally, we delete the file or leave it untouched:
 %    \begin{macrocode}
     \ifdefined\iexec@null\else%
-    \ifiexec@trace%
+    \ifdefined\iexec@trace%
       \ifdefined\iexec@log%
         \message{iexec: Due to package option 'trace',
         the files '\iexec@stdout' and `\iexec@exit` were

@@ -1,4 +1,5 @@
-hard xkeyval
+hard pgfopts
+hard pgfkeys
 soft catchfile
 soft docshots
 soft environ
