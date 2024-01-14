@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2024-01-14 03.27.30 Inputable Shell Executions]
+[2024-01-14 03.31.56 Inputable Shell Executions]
 
 
 
@@ -53,12 +53,12 @@
 
 \RequirePackage{shellesc}
 
-\RequirePackage{xkeyval}
-\makeatletter
-\newif\ifiexec@trace
-\DeclareOptionX{trace}{\iexec@tracetrue}
-\ProcessOptionsX\relax
-\makeatother
+\RequirePackage{pgfopts}
+\pgfkeys{
+  /iexec/.cd,
+  trace/.store in=\iexec@trace,
+}
+\ProcessPgfPackageOptions{/iexec}
 
 \RequirePackage{pgfkeys}
 \makeatletter\pgfkeys{
@@ -179,7 +179,7 @@
       was included into the document^^J}%
     \fi\fi%
     \ifdefined\iexec@null\else%
-    \ifiexec@trace%
+    \ifdefined\iexec@trace%
       \ifdefined\iexec@log%
         \message{iexec: Due to package option 'trace',
         the files '\iexec@stdout' and `\iexec@exit` were
