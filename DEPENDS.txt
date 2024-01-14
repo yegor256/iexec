@@ -1,5 +1,4 @@
-hard pgfopts
-hard pgfkeys
+hard pgf
 soft catchfile
 soft docshots
 soft environ
