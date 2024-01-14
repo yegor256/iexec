@@ -265,6 +265,20 @@ Today is \iexec{date +\%Y}!
 %</verb>
 %\fi
 
+% \DescribeMacro{maybe}
+% If |-shell-escape| is not set, the |\iexec| command will lead to compilation failure. This
+% failure may be avoided with the help of the |maybe| option, which means that the execution
+% of |\iexec| must be quietly skipped if |-shell-escape| is not set:
+%\iffalse
+%<*verb>
+%\fi
+\begin{verbatim}
+\iexec[maybe]{echo 'Hello, world!'}
+\end{verbatim}
+%\iffalse
+%</verb>
+%\fi
+
 % \StopEventually{}
 
 % \section{Implementation}
