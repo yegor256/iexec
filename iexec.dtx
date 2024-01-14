@@ -324,6 +324,7 @@ Today is \iexec{date +\%Y}!
   unskip/.store in = \iexec@unskip,
   quiet/.store in = \iexec@quiet,
   ignore/.store in = \iexec@ignore,
+  maybe/.store in = \iexec@maybe,
   stdout,exit
 }\makeatother
 %    \end{macrocode}
@@ -362,26 +363,23 @@ Today is \iexec{date +\%Y}!
 % First, we verify that |latex| is running with |--shell-escape| option, since without
 % it nothing will work; so, it's better to throw an error earlier than later:
 %    \begin{macrocode}
-    \ifnum\ShellEscapeStatus=1\else%
-      \PackageError{iexec}{You must run TeX processor with
-      --shell-escape option}{}%
-    \fi%
-    \begingroup%
+    \ifnum\ShellEscapeStatus=1%
+      \begingroup%
 %    \end{macrocode}
 % Then, we start the log from a clean line:
 %    \begin{macrocode}
-      \ifdefined\iexec@log%
-        \message{^^J}%
-      \fi%
+        \ifdefined\iexec@log%
+          \message{^^J}%
+        \fi%
 %    \end{macrocode}
 % Then, we define a few special chars in order to escape them in the shell
 % (the full
 % list of them is in \href{https://ctan.mirror.norbert-ruehl.de/info/macros2e/macros2e.pdf}{macros2e}):
 %    \begin{macrocode}
-      \let\%\@percentchar%
-      \let\\\@backslashchar%
-      \let\{\@charlb%
-      \let\}\@charrb%
+        \let\%\@percentchar%
+        \let\\\@backslashchar%
+        \let\{\@charlb%
+        \let\}\@charrb%
 %    \end{macrocode}
 % Then, we execute it and save exit code into a file (where we also add \texttt{\%} in order to trim the content to exactly one number, as suggested \href{https://tex.stackexchange.com/questions/662756}{here}):
 % \changes{0.10.0}{2022/10/19}{The ability to track exit code was added. Now, the code is saved into ``\texttt{iexec.ret}'' file, which is then read and checked for zero value.}
@@ -392,118 +390,131 @@ Today is \iexec{date +\%Y}!
 % \changes{0.11.3}{2022/10/29}{Bug fixed, because of which we had an extra leading space.}
 % \changes{0.11.4}{2022/11/01}{In this version we escape dollar sign with \texttt{\char`\\string} command.}
 %    \begin{macrocode}
-      \def\iexec@cmd{(#2)
-        \ifdefined\iexec@append>\fi>
-        \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
-        \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
-        /bin/echo -n \string$?\% >\iexec@exit}%
-      \ShellEscape{\iexec@cmd}%
+        \def\iexec@cmd{(#2)
+          \ifdefined\iexec@append>\fi>
+          \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
+          \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
+          /bin/echo -n \string$?\% >\iexec@exit}%
+        \ShellEscape{\iexec@cmd}%
 %    \end{macrocode}
 % Then, a message is printed to \TeX{} log:
 %    \begin{macrocode}
-      \ifdefined\iexec@log%
-        \message{iexec: [\iexec@cmd]^^J}%
-      \fi%
-    \endgroup%
+        \ifdefined\iexec@log%
+          \message{iexec: [\iexec@cmd]^^J}%
+        \fi%
+      \endgroup%
 %    \end{macrocode}
 % Then, we read back the exit code, from the file:
 %    \begin{macrocode}
-    \immediate\openin\iexec@exitfile=\iexec@exit%
-    \read\iexec@exitfile to \iexec@code%
-    \immediate\closein\iexec@exitfile%
+      \immediate\openin\iexec@exitfile=\iexec@exit%
+      \read\iexec@exitfile to \iexec@code%
+      \immediate\closein\iexec@exitfile%
 %    \end{macrocode}
 % Then, if required, we print the content of the stdout file to \TeX{} log:
 % \changes{0.11.2}{2022/10/25}{If execution fails, we print the content of ``\texttt{stdout}'' anyway, even if the ``\texttt{log}'' is not turned on.}
 %    \begin{macrocode}
-    \ifdefined\iexec@null\else%
-      \IfFileExists
-        {\iexec@stdout}
-        {}
-        {\PackageError{iexec}{The "\iexec@stdout" file is absent
-          after processing, looks like some internal error}{}}%
-      \ifdefined\iexec@log%
-        \message{iexec: This is the content of '\iexec@stdout':^^J}%
+      \ifdefined\iexec@null\else%
         \IfFileExists
           {\iexec@stdout}
-          {\iexec@typeout{\iexec@stdout}}
+          {}
           {\PackageError{iexec}{The "\iexec@stdout" file is absent
             after processing, looks like some internal error}{}}%
-        \message{<EOF>^^J}%
-      \else%
-        \ifnum\iexec@code=0\else%
-          \ifdefined\iexec@ignore\else%
-            \message{iexec: See the content of '\iexec@stdout'
-              after failure:^^J}%
-            \iexec@typeout{\iexec@stdout}%
-            \message{<EOF>^^J}%
+        \ifdefined\iexec@log%
+          \message{iexec: This is the content of '\iexec@stdout':^^J}%
+          \IfFileExists
+            {\iexec@stdout}
+            {\iexec@typeout{\iexec@stdout}}
+            {\PackageError{iexec}{The "\iexec@stdout" file is absent
+              after processing, looks like some internal error}{}}%
+          \message{<EOF>^^J}%
+        \else%
+          \ifnum\iexec@code=0\else%
+            \ifdefined\iexec@ignore\else%
+              \message{iexec: See the content of '\iexec@stdout'
+                after failure:^^J}%
+              \iexec@typeout{\iexec@stdout}%
+              \message{<EOF>^^J}%
+            \fi%
           \fi%
         \fi%
       \fi%
-    \fi%
 %    \end{macrocode}
 % Then, we check whether it's zero or not (if not zero, we either print a message or fail the build, depending on the presence of |ignore| option):
 %    \begin{macrocode}
-    \ifnum\iexec@code=0\else%
-      \ifdefined\iexec@ignore%
-        \ifdefined\iexec@log%
-          \message{iexec: Execution failure ignored,
-            the exit code was \iexec@code^^J}%
+      \ifnum\iexec@code=0\else%
+        \ifdefined\iexec@ignore%
+          \ifdefined\iexec@log%
+            \message{iexec: Execution failure ignored,
+              the exit code was \iexec@code^^J}%
+          \fi%
+        \else%
+          \PackageError{iexec}{Execution failure,
+            the exit code was \iexec@code}{}%
         \fi%
-      \else%
-        \PackageError{iexec}{Execution failure,
-          the exit code was \iexec@code}{}%
       \fi%
-    \fi%
 %    \end{macrocode}
 % Then, we include the produced output into the current document:
 %    \begin{macrocode}
-    \ifdefined\iexec@null\else%
-    \ifdefined\iexec@quiet%
-      \ifdefined\iexec@log%
-        \message{iexec: Due to 'quiet' option we didn't read
-        the content of '\iexec@stdout'
-        \ifdefined\pdffilesize (\pdffilesize{\iexec@stdout}
-        bytes)\fi^^J}%
-      \fi%
-    \else%
-      \ifdefined\iexec@log%
-        \message{iexec: We are going to include the content of
-        '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
-        {\iexec@stdout} bytes)\fi...^^J}%
-      \fi%
-      \input{\iexec@stdout}%
-      \ifdefined\iexec@unskip\unskip\fi%
-      \message{iexec: The content of '\iexec@stdout'
-      was included into the document^^J}%
-    \fi\fi%
-%    \end{macrocode}
-% Finally, we delete the file or leave it untouched:
-%    \begin{macrocode}
-    \ifdefined\iexec@null\else%
-    \ifdefined\iexec@trace%
-      \ifdefined\iexec@log%
-        \message{iexec: Due to package option 'trace',
-        the files '\iexec@stdout' and `\iexec@exit` were
-        not deleted^^J}%
-      \fi%
-    \else%
-      \ifdefined\iexec@traceit%
+      \ifdefined\iexec@null\else%
+      \ifdefined\iexec@quiet%
         \ifdefined\iexec@log%
-          \message{iexec: Due to 'trace' package option,
-          the files '\iexec@stdout' and '\iexec@exit'
-          were not deleted^^J}%
+          \message{iexec: Due to 'quiet' option we didn't read
+          the content of '\iexec@stdout'
+          \ifdefined\pdffilesize (\pdffilesize{\iexec@stdout}
+          bytes)\fi^^J}%
         \fi%
       \else%
-        \ShellEscape{rm \iexec@stdout}%
         \ifdefined\iexec@log%
-          \message{iexec: The file '\iexec@stdout' was deleted^^J}%
+          \message{iexec: We are going to include the content of
+          '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
+          {\iexec@stdout} bytes)\fi...^^J}%
         \fi%
-        \ShellEscape{rm \iexec@exit}%
+        \input{\iexec@stdout}%
+        \ifdefined\iexec@unskip\unskip\fi%
+        \message{iexec: The content of '\iexec@stdout'
+        was included into the document^^J}%
+      \fi\fi%
+%    \end{macrocode}
+% Then, we delete the file or leave it untouched:
+%    \begin{macrocode}
+      \ifdefined\iexec@null\else%
+      \ifdefined\iexec@trace%
         \ifdefined\iexec@log%
-          \message{iexec: The file '\iexec@exit' was deleted^^J}%
+          \message{iexec: Due to package option 'trace',
+          the files '\iexec@stdout' and `\iexec@exit` were
+          not deleted^^J}%
         \fi%
+      \else%
+        \ifdefined\iexec@traceit%
+          \ifdefined\iexec@log%
+            \message{iexec: Due to 'trace' package option,
+            the files '\iexec@stdout' and '\iexec@exit'
+            were not deleted^^J}%
+          \fi%
+        \else%
+          \ShellEscape{rm \iexec@stdout}%
+          \ifdefined\iexec@log%
+            \message{iexec: The file '\iexec@stdout' was deleted^^J}%
+          \fi%
+          \ShellEscape{rm \iexec@exit}%
+          \ifdefined\iexec@log%
+            \message{iexec: The file '\iexec@exit' was deleted^^J}%
+          \fi%
+        \fi%
+      \fi\fi%
+%    \end{macrocode}
+% Finally, we ignore the whole story if the |maybe| option is provided
+% and the |-shell-escape| is not set:
+%    \begin{macrocode}
+    \else%
+      \ifdefined\iexec@maybe%
+        \message{iexec: The execution skipped because -shell-escape
+          is not set and 'maybe' option is provided^^J}%
+      \else%
+        \PackageError{iexec}{You must run TeX processor with
+        --shell-escape option}{}%
       \fi%
-    \fi\fi%
+    \fi%
   \endgroup%
 }\makeatother
 %    \end{macrocode}
