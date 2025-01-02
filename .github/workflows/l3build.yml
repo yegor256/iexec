@@ -9,11 +9,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-15]
+        os: [ubuntu-24.04, macos-15]
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get -y install ghostscript
-        if: matrix.os == 'ubuntu-22.04'
+        if: matrix.os == 'ubuntu-24.04'
       - uses: teatimeguest/setup-texlive-action@v3.1.0
         with:
           update-all-packages: true
@@ -24,10 +24,10 @@ jobs:
           cp build/distrib/tds/tex/latex/iexec/iexec.sty build/gh-pages
           sed -i "s/0\.0\.0/$(date +%H.%M.%S)/g" build/gh-pages/iexec.sty
           sed -i "s|0000/00/00|$(date +%Y/%m/%d)|g" build/gh-pages/iexec.sty
-        if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-22.04'
+        if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-24.04'
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
           folder: build/gh-pages
           clean: true
-        if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-22.04'
+        if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-24.04'
