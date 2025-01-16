@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2025/01/16 09.22.57 Inputable Shell Executions]
+[2025/01/16 09.25.29 Inputable Shell Executions]
 
 
 
@@ -141,7 +141,8 @@
         \else%
           \ifnum\iexec@code=0\else%
             \ifdefined\iexec@ignore\else%
-              \message{iexec: See the content of '\iexec@stdout'
+              \message{iexec: See the content of '\iexec@stdout'\ifPDFTeX
+                \space(\pdffilesize{\iexec@stdout} bytes)\else\fi
                 after failure:^^J}%
               \iexec@typeout{\iexec@stdout}%
               \message{<EOF>^^J}%
