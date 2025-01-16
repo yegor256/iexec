@@ -289,6 +289,12 @@ Today is \iexec{date +\%Y}!
 \RequirePackage{shellesc}
 %    \end{macrocode}
 
+% Then, we include the \href{https://ctan.org/pkg/iftex}{iftex} package, which
+% helps us detect which LaTeX engine we are running:
+%    \begin{macrocode}
+\RequirePackage{iftex}
+%    \end{macrocode}
+
 % Then, we parse package options, with the help
 % of \href{https://ctan.org/pkg/pgfopts}{pgfopts}:
 % \changes{0.14.0}{2024/01/14}{The \texttt{xkeyval} package is not used anymore. Instead, we use \texttt{pfgopts} in order to parse package options.}
@@ -421,8 +427,9 @@ Today is \iexec{date +\%Y}!
           {\PackageError{iexec}{The "\iexec@stdout" file is absent
             after processing, looks like some internal error}{}}%
         \ifdefined\iexec@log%
-          \message{iexec: This is the content of '\iexec@stdout'
-            (\pdffilesize{\iexec@stdout} bytes):^^J}%
+          \message{iexec: This is the content of '\iexec@stdout'\ifPDFTeX
+            (\pdffilesize{\iexec@stdout} bytes)
+          \else\fi:^^J}%
           \IfFileExists
             {\iexec@stdout}
             {\iexec@typeout{\iexec@stdout}}
