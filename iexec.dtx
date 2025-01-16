@@ -422,7 +422,7 @@ Today is \iexec{date +\%Y}!
             after processing, looks like some internal error}{}}%
         \ifdefined\iexec@log%
           \message{iexec: This is the content of '\iexec@stdout'\ifdefined\pdffilesize
-            (\pdffilesize{\iexec@stdout} bytes)\else\fi:^^J}%
+            \space(\pdffilesize{\iexec@stdout} bytes)\else\fi:^^J}%
           \IfFileExists
             {\iexec@stdout}
             {\iexec@typeout{\iexec@stdout}}
@@ -433,7 +433,7 @@ Today is \iexec{date +\%Y}!
           \ifnum\iexec@code=0\else%
             \ifdefined\iexec@ignore\else%
               \message{iexec: See the content of '\iexec@stdout'\ifdefined\pdffilesize
-                (\pdffilesize{\iexec@stdout} bytes)\fi
+                \space(\pdffilesize{\iexec@stdout} bytes)\fi
                 after failure:^^J}%
               \iexec@typeout{\iexec@stdout}%
               \message{<EOF>^^J}%
