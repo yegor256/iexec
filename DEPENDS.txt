@@ -11,6 +11,7 @@ soft href-ul
 soft hypdoc
 soft l3build
 soft libertine
+soft microtype
 soft minted
 soft pgf
 soft pgfopts
