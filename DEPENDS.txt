@@ -1,4 +1,6 @@
+hard iftex
 hard pgf
+hard shellesc
 soft catchfile
 soft docshots
 soft environ
