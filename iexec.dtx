@@ -428,8 +428,7 @@ Today is \iexec{date +\%Y}!
             after processing, looks like some internal error}{}}%
         \ifdefined\iexec@log%
           \message{iexec: This is the content of '\iexec@stdout'\ifPDFTeX
-            (\pdffilesize{\iexec@stdout} bytes)
-          \else\fi:^^J}%
+            \space(\pdffilesize{\iexec@stdout} bytes)\else\fi:^^J}%
           \IfFileExists
             {\iexec@stdout}
             {\iexec@typeout{\iexec@stdout}}
