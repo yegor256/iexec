@@ -291,6 +291,7 @@ Today is \iexec{date +\%Y}!
 
 % Then, we include the \href{https://ctan.org/pkg/iftex}{iftex} package, which
 % helps us detect which LaTeX engine we are running:
+% \changes{0.15.0}{2025/01/16}{The size of the stdout file is printed in the log.}
 %    \begin{macrocode}
 \RequirePackage{iftex}
 %    \end{macrocode}
@@ -438,7 +439,8 @@ Today is \iexec{date +\%Y}!
         \else%
           \ifnum\iexec@code=0\else%
             \ifdefined\iexec@ignore\else%
-              \message{iexec: See the content of '\iexec@stdout'
+              \message{iexec: See the content of '\iexec@stdout'\ifPDFTeX
+                \space(\pdffilesize{\iexec@stdout} bytes)\else\fi
                 after failure:^^J}%
               \iexec@typeout{\iexec@stdout}%
               \message{<EOF>^^J}%

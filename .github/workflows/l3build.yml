@@ -42,7 +42,7 @@ jobs:
         with:
           update-all-packages: true
           package-file: DEPENDS.txt
-      - run: l3build ctan --show-log-on-error --halt-on-error || cat build/doc/iexec.log
+      - run: l3build ctan --show-log-on-error --halt-on-error
       - run: |
           mkdir build/gh-pages
           cp build/distrib/tds/tex/latex/iexec/iexec.sty build/gh-pages
