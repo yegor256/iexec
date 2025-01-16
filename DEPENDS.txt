@@ -1,4 +1,3 @@
-hard iftex
 hard pgf
 hard shellesc
 soft catchfile
