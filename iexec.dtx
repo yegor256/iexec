@@ -98,7 +98,7 @@
 
 % \DescribeMacro{quiet}
 % If you don't want the output to be visible,
-% use |\phantom\{\iexec{...}}|.
+% use |\phantom{\iexec{...}}|.
 % Otherwise, you can use the ``|quiet|'' option:
 %\iffalse
 %<*verb>
@@ -158,7 +158,7 @@ Today is \iexec[exit=code.txt]{./broken-command.sh}.
 % The file specified will be deleted right after its usage. If you don't
 % want this to happen, use the ``|trace|'' package option: all files will remain
 % in the directory where they were created.
-% It's possible to turn on the tracing globbaly, for the entire document, using
+% It's possible to turn on the tracing globally, for the entire document, using
 % the ``|trace|'' option of the package:
 %\iffalse
 %<*verb>
@@ -194,7 +194,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 
 % \DescribeMacro{unskip}
 % In order to remove the tailing spacing after the content, you may use |unskip| package option,
-% which will append |\unskip| commmand to every |\iexec|:
+% which will append |\unskip| command to every |\iexec|:
 %\iffalse
 %<*verb>
 %\fi
@@ -272,7 +272,7 @@ Today is \iexec{date +\%Y}!
 
 % Then, we parse package options, with the help
 % of \href{https://ctan.org/pkg/pgfopts}{pgfopts}:
-% \changes{0.14.0}{2024/01/14}{The \texttt{xkeyval} package is not used anymore. Instead, we use \texttt{pfgopts} in order to parse package options.}
+% \changes{0.14.0}{2024/01/14}{The \texttt{xkeyval} package is not used anymore. Instead, we use \texttt{pgfopts} in order to parse package options.}
 %    \begin{macrocode}
 \RequirePackage{pgfopts}
 \pgfkeys{
@@ -342,7 +342,7 @@ Today is \iexec{date +\%Y}!
   \begingroup%
     \pgfqkeys{/iexec}{#1}%
 %    \end{macrocode}
-% First, we verify that |latex| is running with |--shell-escape| option, since without
+% First, we verify that |latex| is running with the |--shell-escape| option, since without
 % it nothing will work; so, it's better to throw an error earlier than later:
 %    \begin{macrocode}
     \ifnum\ShellEscapeStatus=1%
@@ -487,13 +487,13 @@ Today is \iexec{date +\%Y}!
         \fi%
       \fi\fi%
 %    \end{macrocode}
-% \changes{0.14.0}{2024/01/14}{The \texttt{maybe} option introduced, allowing the user to skip the entire execution of the \texttt{\char`\\iexec} command, when \texttt{-shell-escape} option is off.}
+% \changes{0.14.0}{2024/01/14}{The \texttt{maybe} option introduced, allowing the user to skip the entire execution of the \texttt{\char`\\iexec} command, when \texttt{--shell-escape} option is off.}
 % Finally, we ignore the whole story if the |maybe| option is provided
-% and the |-shell-escape| is not set:
+% and the |--shell-escape| is not set:
 %    \begin{macrocode}
     \else%
       \ifdefined\iexec@maybe%
-        \message{iexec: The execution skipped because -shell-escape
+        \message{iexec: The execution skipped because --shell-escape
           is not set and 'maybe' option is provided^^J}%
       \else%
         \PackageError{iexec}{You must run TeX processor with
