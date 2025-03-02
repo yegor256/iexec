@@ -31,7 +31,7 @@ iexec: [(echo "hello_world") > underscore.txt 2>&1; /bin/echo -n $?% >iexec.ret]
 iexec: This is the content of 'underscore.txt':
 hello_world
 <EOF>
-iexec: Due to 'quiet' option we didn't read the content of 'underscore.txt'
+iexec: Due to 'quiet' option we didn't read the content of 'underscore.txt' 
 iexec: Due to 'trace' package option, the files 'underscore.txt' and 'iexec.ret' were not deleted
 runsystem((echo $ABSENT_VARIABLE) > foo.txt 2>&1; /bin/echo -n $?% >iexec.ret)...executed.
 (foo.txt) iexec: The content of 'foo.txt' was included into the document
@@ -55,7 +55,7 @@ iexec: [(echo 5) > a.txt 2>&1; /bin/echo -n $?% >iexec.ret]
 iexec: This is the content of 'a.txt':
 5
 <EOF>
-iexec: Due to 'quiet' option we didn't read the content of 'a.txt'
+iexec: Due to 'quiet' option we didn't read the content of 'a.txt' 
 iexec: Due to 'trace' package option, the files 'a.txt' and 'iexec.ret' were not deleted
 runsystem((echo 6) > iexec.tmp 2>&1; /bin/echo -n $?% >iexec.ret)...executed.
 \foo=\read...
