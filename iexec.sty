@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2025/03/02 10.49.24 Inputable Shell Executions]
+[2025/03/02 14.57.03 Inputable Shell Executions]
 
 
 
@@ -205,7 +205,7 @@
       \fi\fi%
     \else%
       \ifdefined\iexec@maybe%
-        \message{iexec: The execution skipped because -shell-escape
+        \message{iexec: The execution skipped because --shell-escape
           is not set and 'maybe' option is provided^^J}%
       \else%
         \PackageError{iexec}{You must run TeX processor with
