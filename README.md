@@ -5,14 +5,14 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/iexec/blob/master/LICENSE.txt)
 
 This LaTeX package helps you execute commands from the document and then input
-their output. The package uses [`shellesc`](https://ctan.org/pkg/shellesc) package.
+their output. The package uses the [`shellesc`](https://ctan.org/pkg/shellesc) package.
 The development of this package was motivated
 by [this](https://stackoverflow.com/questions/3252957).
 
 First,
 [install it](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages)
 from [CTAN](https://ctan.org/pkg/iexec)
-and then use in the preamble:
+and then use it in the preamble:
 
 ```tex
 \documentclass{article}
@@ -23,16 +23,16 @@ Today is \iexec{date +\%e-\%b-\%Y}.
 ```
 
 Otherwise, you can download
-[`iexec.sty`](https://yegor256.github.io/iexec/iexec.sty) and add
+[`iexec.sty`](https://yegor256.github.io/iexec/iexec.sty) and add it
 to your project.
 
 The full example and all commands are available in the
 [`iexec.pdf`][pdf] file.
 
 If you want to contribute yourself, make a fork, then create a branch,
-then run `make` in the root directory.
+then run `l3build check` in the root directory.
 It should compile everything without errors. If not, submit an issue and wait.
-Otherwise, make your changes and then run `make` again. If the build is
+Otherwise, make your changes and then run `l3build check` again. If the build is
 still clean, submit a pull request.
 
 [pdf]: https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/iexec/iexec.pdf

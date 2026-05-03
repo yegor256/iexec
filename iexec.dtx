@@ -125,7 +125,7 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %\iffalse
 %</verb>
 %\fi
-% The tailing part of the command here removes all ends-of-line.
+% The trailing part of the command here removes all ends-of-line.
 
 % \DescribeMacro{stderr}
 % The error output of the code is saved into the file provided as an
@@ -193,7 +193,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 
 % \DescribeMacro{unskip}
-% In order to remove the tailing spacing after the content, you may use |unskip| package option,
+% In order to remove the trailing spacing after the content, you may use |unskip| package option,
 % which will append |\unskip| command to every |\iexec|:
 %\iffalse
 %<*verb>
@@ -247,9 +247,9 @@ Today is \iexec{date +\%Y}!
 %\fi
 
 % \DescribeMacro{maybe}
-% If |-shell-escape| is not set, the |\iexec| command will lead to compilation failure. This
+% If |--shell-escape| is not set, the |\iexec| command will lead to compilation failure. This
 % failure may be avoided with the help of the |maybe| option, which means that the execution
-% of |\iexec| must be quietly skipped if |-shell-escape| is not set:
+% of |\iexec| must be quietly skipped if |--shell-escape| is not set:
 %\iffalse
 %<*verb>
 %\fi
@@ -332,9 +332,9 @@ Today is \iexec{date +\%Y}!
 % \changes{0.10.0}{2022/10/19}{The file "iexec.ret" is reused for all scripts.}
 % \changes{0.10.0}{2022/10/19}{The option ``\texttt{ignore}'' suppresses the checking of ``\texttt{iexec.ret}'' value.}
 % \changes{0.7.0}{2022/09/25}{The option "append" was introduced --- if it's turned on, stdout will be appended to the file, instead of rewriting it (this is how it was before).}
-% \changes{0.7.0}{2022/09/25}{The option ``\texttt{log}'' was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying. Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
+% \changes{0.7.0}{2022/09/25}{The option ``\texttt{log}'' was introduced, to turn on log/debug messages in TeX log (they were all visible always, which was sometimes annoying). Also, this option enables printing of the entire content of stdout to the log too (this may be pretty convenient for debugging).}
 % \changes{0.11.0}{2022/10/22}{The option ``\texttt{exit}'' allows to change the name of the file with exit code.}
-% \changes{0.12.0}{2023/10/12}{The option ``\texttt{unskip}'' adds \texttt{\char`\\unskip} after each \texttt{\char`\\iexec}, in order to trip the tailing end of line space.}
+% \changes{0.12.0}{2023/10/12}{The option ``\texttt{unskip}'' adds \texttt{\char`\\unskip} after each \texttt{\char`\\iexec}, in order to strip the trailing end-of-line space.}
 %    \begin{macrocode}
 \makeatletter
 \newread\iexec@exitfile
