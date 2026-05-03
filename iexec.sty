@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2026-05-01 07.40.57 Inputable Shell Executions]
+[2026-05-03 15.02.24 Inputable Shell Executions]
 
 
 
@@ -182,8 +182,8 @@
       \ifdefined\iexec@trace%
         \ifdefined\iexec@log%
           \message{iexec: Due to package option 'trace',
-          the files '\iexec@stdout' and `\iexec@exit` were
-          not deleted^^J}%
+          the files '\iexec@stdout' and '\iexec@exit'
+          were not deleted^^J}%
         \fi%
       \else%
         \ifdefined\iexec@traceit%
