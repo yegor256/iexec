@@ -47,9 +47,9 @@
 \CodelineIndex
 \RecordChanges
 \begin{document}
-	\DocInput{iexec.dtx}
-	\PrintChanges
-	\PrintIndex
+  \DocInput{iexec.dtx}
+  \PrintChanges
+  \PrintIndex
 \end{document}
 %</driver>
 % \fi
@@ -465,8 +465,8 @@ Today is \iexec{date +\%Y}!
       \ifdefined\iexec@trace%
         \ifdefined\iexec@log%
           \message{iexec: Due to package option 'trace',
-          the files '\iexec@stdout' and `\iexec@exit` were
-          not deleted^^J}%
+          the files '\iexec@stdout' and '\iexec@exit'
+          were not deleted^^J}%
         \fi%
       \else%
         \ifdefined\iexec@traceit%
