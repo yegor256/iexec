@@ -27,6 +27,11 @@ jobs:
           package_file: .texlive-packages.txt
           texlive_version: 2025
       - run: l3build ctan --show-log-on-error --halt-on-error
+      - if: failure()
+        run: |
+          echo '::group::iexec.log'
+          cat build/doc/iexec.log 2>/dev/null || echo 'no build/doc/iexec.log'
+          echo '::endgroup::'
       - run: |
           mkdir build/gh-pages
           cp build/distrib/tds/tex/latex/iexec/iexec.sty build/gh-pages

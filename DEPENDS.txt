@@ -8,6 +8,7 @@ soft fvextra
 soft href-ul
 soft hypdoc
 soft l3build
+soft lmodern
 soft microtype
 soft minted
 soft pgf
