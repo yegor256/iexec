@@ -60,12 +60,12 @@
 % \maketitle
 %
 % \textbf{\color{red}NB!}
-% This package doesn't work on Windows!
+% This package does not operate on Windows!
 %
 % \section{Introduction}
 %
-% This package helps you execute shell commands right from the
-% document and then put their output to the document:
+% This package permits the execution of shell commands directly from within
+% the document and the inclusion of their output in the resulting text:
 %
 % \begin{docshot}
 % \documentclass{article}
@@ -78,27 +78,27 @@
 % \end{document}
 % \end{docshot}
 
-% \DescribeMacro{\iexec} The only command provided by this package is
+% \DescribeMacro{\iexec} The sole command supplied by this package is
 % |\iexec| \oarg{options} \marg{cmd}.
-% Its only mandatory argument \meta{cmd} is the command to be executed
-% through the terminal shell (|bash|, or whatever is set as the default one
-% in your console).
+% Its only mandatory argument, \meta{cmd}, denotes the command to be executed
+% through the terminal shell (|bash|, or whichever shell is configured as
+% the default in the host console).
 
-% You have to run |pdflatex| (or just |latex|)
-% with the |--shell-escape| flag
-% in order to let \href{https://ctan.org/pkg/shellesc}{shellesc}
-% execute your shell command.
+% Compilation must be performed with |pdflatex| (or simply |latex|)
+% under the |--shell-escape| flag, so that
+% \href{https://ctan.org/pkg/shellesc}{shellesc}
+% may execute the supplied shell command.
 
-% It is important to remember that \LaTeX{} always uses ``|/bin/sh|'' shell.
-% This can't be changed,
-% as \href{https://tex.stackexchange.com/questions/698312}{explained here}.
+% It is worth noting that \LaTeX{} invariably employs the ``|/bin/sh|'' shell.
+% This behaviour cannot be altered, as
+% \href{https://tex.stackexchange.com/questions/698312}{explained here}.
 
 % \section{Options}
 
 % \DescribeMacro{quiet}
-% If you don't want the output to be visible,
-% use |\phantom{\iexec{...}}|.
-% Otherwise, you can use the ``|quiet|'' option:
+% Should the output be required to remain invisible,
+% |\phantom{\iexec{...}}| may be employed.
+% Alternatively, the ``|quiet|'' option is available:
 %\iffalse
 %<*verb>
 %\fi
@@ -109,12 +109,12 @@ I just want to delete some file:
 %\iffalse
 %</verb>
 %\fi
-% In this case, whatever the shell command produces will not be included
-% into the document.
+% Under this option, whatever the shell command produces is excluded
+% from the document.
 
 % \DescribeMacro{stdout}
-% The output of your code is saved into the file provided as an
-% optional argument of |\iexec| (the default value is ``|iexec.tmp|''):
+% The output of the executed code is written to the file specified as an
+% optional argument of |\iexec| (the default being ``|iexec.tmp|''):
 %\iffalse
 %<*verb>
 %\fi
@@ -124,12 +124,12 @@ Today is \iexec[stdout=date.txt]{date +\%e-\%b-\%Y | tr -d '\\n'}.
 %\iffalse
 %</verb>
 %\fi
-% The trailing part of the command here removes all ends-of-line.
+% The trailing portion of the command above removes all line terminators.
 
 % \DescribeMacro{stderr}
-% The error output of the code is saved into the file provided as an
-% optional argument of |\iexec| (by default the error output
-% is streamed into ``|stdout|''):
+% The error output of the executed code is written to the file specified
+% as an optional argument of |\iexec| (by default the error output
+% is redirected into ``|stdout|''):
 %\iffalse
 %<*verb>
 %\fi
@@ -141,8 +141,8 @@ Today is \iexec[stderr=my.txt]{broken-command}.
 %\fi
 
 % \DescribeMacro{exit}
-% The exit code of the command is saved into a file. You can change the name of it
-% using the ``|exit|'' option:
+% The exit code of the command is written to a file. The name of this file
+% may be altered by means of the ``|exit|'' option:
 %\iffalse
 %<*verb>
 %\fi
@@ -154,11 +154,11 @@ Today is \iexec[exit=code.txt]{./broken-command.sh}.
 %\fi
 
 % \DescribeMacro{trace}
-% The file specified will be deleted right after its usage. If you don't
-% want this to happen, use the ``|trace|'' package option: all files will remain
-% in the directory where they were created.
-% It's possible to turn on the tracing globally, for the entire document, using
-% the ``|trace|'' option of the package:
+% The file thus produced is deleted immediately after its use. To prevent
+% this deletion, the ``|trace|'' package option may be employed: all files
+% will then remain in the directory where they were created.
+% Tracing may also be enabled globally, for the entire document, by means
+% of the ``|trace|'' option of the package:
 %\iffalse
 %<*verb>
 %\fi
@@ -166,7 +166,7 @@ Today is \iexec[exit=code.txt]{./broken-command.sh}.
 \documentclass{article}
 \usepackage[trace]{iexec}
 \begin{document}
-This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
+This file is preserved: \iexec[stdout=me.txt]{whoami}.
 \end{document}
 \end{verbatim}
 %\iffalse
@@ -174,7 +174,7 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 
 % \DescribeMacro{append}
-% The ``stdout'' produced will be appended to the file specified:
+% The ``stdout'' thus produced is appended to the file specified:
 %\iffalse
 %<*verb>
 %\fi
@@ -192,8 +192,8 @@ This file won't be deleted: \iexec[stdout=me.txt]{whoami}.
 %\fi
 
 % \DescribeMacro{unskip}
-% In order to remove the trailing spacing after the content, you may use |unskip| package option,
-% which will append |\unskip| command to every |\iexec|:
+% To remove the trailing space following the content, the |unskip| package option may be employed,
+% which appends an |\unskip| command to every |\iexec|:
 %\iffalse
 %<*verb>
 %\fi
@@ -209,7 +209,7 @@ Today is \iexec{date +\%Y}!
 %\fi
 
 % \DescribeMacro{log}
-% The ``stdout'' produced will be printed in the \TeX{} log:
+% The ``stdout'' thus produced is printed to the \TeX{} log:
 %\iffalse
 %<*verb>
 %\fi
@@ -221,7 +221,7 @@ Today is \iexec{date +\%Y}!
 %\fi
 
 % \DescribeMacro{null}
-% The ``stdout'' of the command will be sent to ``|/dev/null|'':
+% The ``stdout'' of the command is redirected to ``|/dev/null|'':
 %\iffalse
 %<*verb>
 %\fi
@@ -233,8 +233,8 @@ Today is \iexec{date +\%Y}!
 %\fi
 
 % \DescribeMacro{ignore}
-% By default, we report an error if the exit code is not equal to zero. You can suppress
-% this with the ``|ignore|'' option:
+% By default, an error is reported whenever the exit code differs from zero. This behaviour
+% may be suppressed by means of the ``|ignore|'' option:
 %\iffalse
 %<*verb>
 %\fi
@@ -246,9 +246,9 @@ Today is \iexec{date +\%Y}!
 %\fi
 
 % \DescribeMacro{maybe}
-% If |--shell-escape| is not set, the |\iexec| command will lead to compilation failure. This
-% failure may be avoided with the help of the |maybe| option, which means that the execution
-% of |\iexec| must be quietly skipped if |--shell-escape| is not set:
+% In the absence of the |--shell-escape| flag, the |\iexec| command would normally produce a
+% compilation failure. Such failure may be averted by means of the |maybe| option, whereby the
+% execution of |\iexec| is silently skipped whenever |--shell-escape| is not in force:
 %\iffalse
 %<*verb>
 %\fi
