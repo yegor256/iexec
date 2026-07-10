@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2026-07-04 03.51.26 Inputable Shell Executions]
+[2026-07-10 06.03.35 Inputable Shell Executions]
 
 
 
@@ -95,6 +95,20 @@
 \ExplSyntaxOff\makeatother
 
 \makeatletter
+\newif\ifiexec@windows
+\ExplSyntaxOn
+\sys_if_platform_windows:TF{\iexec@windowstrue}{\iexec@windowsfalse}
+\ExplSyntaxOff
+\ifiexec@windows
+  \def\iexec@devnull{NUL}
+  \def\iexec@rm{del}
+\else
+  \def\iexec@devnull{/dev/null}
+  \def\iexec@rm{rm}
+\fi
+\makeatother
+
+\makeatletter
 \newread\iexec@exitfile
 \newcommand\iexec[2][]{%
   \begingroup%
@@ -110,9 +124,13 @@
         \let\}\@charrb%
         \def\iexec@cmd{(#2)
           \ifdefined\iexec@append>\fi>
-          \ifdefined\iexec@null/dev/null\else\iexec@stdout\fi
-          \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi;
-          /bin/echo -n \string$?\% >\iexec@exit}%
+          \ifdefined\iexec@null\iexec@devnull\else\iexec@stdout\fi
+          \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi%
+          \ifiexec@windows%
+            \space&&\space(echo 0)>\iexec@exit\space||\space(echo 1)>\iexec@exit%
+          \else%
+            ;\space/bin/echo -n \string$?\% >\iexec@exit%
+          \fi}%
         \ShellEscape{\iexec@cmd}%
         \ifdefined\iexec@log%
           \message{iexec: [\iexec@cmd]^^J}%
@@ -193,11 +211,11 @@
             were not deleted^^J}%
           \fi%
         \else%
-          \ShellEscape{rm \iexec@stdout}%
+          \ShellEscape{\iexec@rm\space\iexec@stdout}%
           \ifdefined\iexec@log%
             \message{iexec: The file '\iexec@stdout' was deleted^^J}%
           \fi%
-          \ShellEscape{rm \iexec@exit}%
+          \ShellEscape{\iexec@rm\space\iexec@exit}%
           \ifdefined\iexec@log%
             \message{iexec: The file '\iexec@exit' was deleted^^J}%
           \fi%
