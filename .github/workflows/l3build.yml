@@ -44,3 +44,31 @@ jobs:
           folder: build/gh-pages
           clean: true
         if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-24.04'
+  windows:
+    timeout-minutes: 15
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v7
+      - shell: bash
+        run: sed -E 's/^(hard|soft)[[:space:]]+//' DEPENDS.txt > .texlive-packages.txt
+      - uses: zauguin/install-texlive@v4.4.0
+        with:
+          package_file: .texlive-packages.txt
+          texlive_version: 2025
+      - name: Check that iexec runs on Windows via cmd.exe
+        shell: bash
+        run: |
+          l3build unpack
+          cp build/unpacked/iexec.sty .
+          cat > win-smoke.tex <<'EOF'
+          \documentclass{article}
+          \usepackage{iexec}
+          \begin{document}
+          \iexec[quiet]{echo hello}
+          \iexec[null]{echo hello}
+          \iexec[quiet,ignore]{this-command-does-not-exist}
+          Rendered by \iexec{echo cross-platform}.
+          \end{document}
+          EOF
+          pdflatex -interaction=nonstopmode -halt-on-error -shell-escape win-smoke.tex
+          test -f win-smoke.pdf
