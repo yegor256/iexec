@@ -46,7 +46,7 @@ jobs:
         if: github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-24.04'
   windows:
     timeout-minutes: 15
-    runs-on: windows-2022
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v7
       - shell: bash
