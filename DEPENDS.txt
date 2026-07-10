@@ -11,6 +11,7 @@ soft l3build
 soft lm
 soft microtype
 soft minted
+soft pdftexcmds
 soft pgf
 soft pgfopts
 soft scheme-basic

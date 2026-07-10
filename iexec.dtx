@@ -271,6 +271,15 @@ Today is \iexec{date +\%Y}!
 \RequirePackage{shellesc}
 %    \end{macrocode}
 
+% Then, we include the \href{https://ctan.org/pkg/pdftexcmds}{pdftexcmds} package, which
+% provides |\pdf@filesize|, working uniformly across \texttt{pdftex},
+% \texttt{luatex}, and \texttt{xetex} (the |\pdffilesize| primitive exists in
+% \texttt{pdftex} only):
+% \changes{0.16.1}{2026/07/10}{The file size is now printed to the log under \texttt{luatex} and \texttt{xetex} too, not only \texttt{pdftex}, because we use \texttt{\char`\\pdf@filesize} from \texttt{pdftexcmds} instead of the \texttt{\char`\\pdffilesize} primitive.}
+%    \begin{macrocode}
+\RequirePackage{pdftexcmds}
+%    \end{macrocode}
+
 % Then, we parse package options, with the help
 % of \href{https://ctan.org/pkg/pgfopts}{pgfopts}:
 % \changes{0.14.0}{2024/01/14}{The \texttt{xkeyval} package is not used anymore. Instead, we use \texttt{pgfopts} in order to parse package options.}
@@ -428,8 +437,8 @@ Today is \iexec{date +\%Y}!
           {\PackageError{iexec}{The "\iexec@stdout" file is absent
             after processing, looks like some internal error}{}}%
         \ifdefined\iexec@log%
-          \message{iexec: This is the content of '\iexec@stdout'\ifdefined\pdffilesize
-            \space(\pdffilesize{\iexec@stdout} bytes)\else\fi:^^J}%
+          \message{iexec: This is the content of '\iexec@stdout'%
+            \space(\pdf@filesize{\iexec@stdout} bytes):^^J}%
           \IfFileExists
             {\iexec@stdout}
             {\iexec@typeout{\iexec@stdout}}
@@ -439,8 +448,8 @@ Today is \iexec{date +\%Y}!
         \else%
           \ifnum\iexec@code=0\else%
             \ifdefined\iexec@ignore\else%
-              \message{iexec: See the content of '\iexec@stdout'\ifdefined\pdffilesize
-                \space(\pdffilesize{\iexec@stdout} bytes)\fi
+              \message{iexec: See the content of '\iexec@stdout'%
+                \space(\pdf@filesize{\iexec@stdout} bytes)
                 after failure:^^J}%
               \iexec@typeout{\iexec@stdout}%
               \message{<EOF>^^J}%
@@ -470,14 +479,12 @@ Today is \iexec{date +\%Y}!
         \ifdefined\iexec@log%
           \message{iexec: Due to 'quiet' option we didn't read
           the content of '\iexec@stdout'
-          \ifdefined\pdffilesize (\pdffilesize{\iexec@stdout}
-          bytes)\fi^^J}%
+          (\pdf@filesize{\iexec@stdout} bytes)^^J}%
         \fi%
       \else%
         \ifdefined\iexec@log%
           \message{iexec: We are going to include the content of
-          '\iexec@stdout'\ifdefined\pdffilesize (\pdffilesize
-          {\iexec@stdout} bytes)\fi...^^J}%
+          '\iexec@stdout'(\pdf@filesize{\iexec@stdout} bytes)...^^J}%
         \fi%
         \input{\iexec@stdout}%
         \ifdefined\iexec@unskip\unskip\fi%
