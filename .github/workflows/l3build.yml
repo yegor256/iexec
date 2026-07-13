@@ -60,6 +60,7 @@ jobs:
         run: |
           l3build unpack
           cp build/unpacked/iexec.sty .
+          mkdir sub
           cat > win-smoke.tex <<'EOF'
           \documentclass{article}
           \usepackage{iexec}
@@ -67,6 +68,7 @@ jobs:
           \iexec[quiet]{echo hello}
           \iexec[null]{echo hello}
           \iexec[quiet,ignore]{this-command-does-not-exist}
+          \iexec[quiet]{cd sub && echo inside}
           Rendered by \iexec{echo cross-platform}.
           \end{document}
           EOF

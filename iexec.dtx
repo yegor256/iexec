@@ -402,8 +402,14 @@ Today is \iexec{date +\%Y}!
 % \changes{0.11.1}{2022/10/23}{When exit code is printed to the file, we add percentchar at the end of line in order to avoid extra space when reading it back.}
 % \changes{0.11.3}{2022/10/29}{Bug fixed, because of which we had an extra leading space.}
 % \changes{0.11.4}{2022/11/01}{In this version we escape dollar sign with \texttt{\char`\\string} command.}
+% \changes{0.16.2}{2026/07/13}{On Windows, the user command is wrapped in \texttt{cmd /c "..."}, so that a \texttt{cd} inside it stays in a child process and doesn't leak into the exit-code capture that follows.}
+% On Windows, |cmd.exe| parentheses are not a subshell, so a |cd| inside
+% the user's command would leak out and make the trailing exit-code echo
+% resolve its file against the changed directory; therefore, on Windows we
+% run the command through a nested |cmd /c "..."|, keeping its directory
+% change isolated (on Unix the |(...)| subshell already does this):
 %    \begin{macrocode}
-        \def\iexec@cmd{(#2)
+        \def\iexec@cmd{\ifiexec@windows cmd\space/c\space"(#2)"\else(#2)\fi\space
           \ifdefined\iexec@append>\fi>
           \ifdefined\iexec@null\iexec@devnull\else\iexec@stdout\fi
           \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi%
