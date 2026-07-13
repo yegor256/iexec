@@ -11,7 +11,7 @@ typesetruns = 2
 
 uploadconfig = {
   pkg = "iexec",
-  version = "0.0.0 0000-00-00",
+  version = "0.16.1 2026-07-13",
   author = "Yegor Bugayenko",
   uploader = "Yegor Bugayenko",
   email = "yegor256@gmail.com",
