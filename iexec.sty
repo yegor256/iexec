@@ -31,7 +31,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{iexec}
-[2026-07-10 06.27.35 Inputable Shell Executions]
+[2026-07-13 18.51.01 Inputable Shell Executions]
 
 
 
@@ -124,7 +124,7 @@
         \let\\\@backslashchar%
         \let\{\@charlb%
         \let\}\@charrb%
-        \def\iexec@cmd{(#2)
+        \def\iexec@cmd{\ifiexec@windows cmd\space/c\space"(#2)"\else(#2)\fi\space
           \ifdefined\iexec@append>\fi>
           \ifdefined\iexec@null\iexec@devnull\else\iexec@stdout\fi
           \space\ifdefined\iexec@stderr2>\iexec@stderr\else2>&1\fi%
