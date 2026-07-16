@@ -1,7 +1,9 @@
 hard pgf
+soft bookmark
 soft catchfile
 soft docshots
 soft environ
+soft fail-fast
 soft ffcode
 soft framed
 soft fvextra
